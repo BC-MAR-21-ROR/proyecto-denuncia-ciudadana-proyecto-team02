@@ -1,4 +1,9 @@
-![BrightCoders Logo](badges/coverage_badge_total.svg)
+
+![Rubycritic_app](badges/app/rubycritic_badge_score.svg)
+
+![Rubycritic_spec](badges/spec/rubycritic_badge_score.svg)
+
+![Coverage_badge](badges/coverage_badge_total.svg)
 
 
 ![BrightCoders Logo](img/logo-bc.png)
