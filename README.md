@@ -1,3 +1,6 @@
+![BrightCoders Logo](badges/coverage_badge_total.svg)
+
+
 ![BrightCoders Logo](img/logo-bc.png)
 
 # Denuncia ciudadana

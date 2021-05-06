@@ -15,6 +15,9 @@ gem 'pg'
 gem 'puma', '~> 5.0'
 # Use SCSS for stylesheets
 gem 'sass-rails', '>= 6'
+# SimpleCov is a code coverage https://github.com/simplecov-ruby/simplecov/
+gem "simplecov", "0.17"
+gem "simplecov-small-badge", "~> 0.2.4"
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 gem 'turbolinks', '~> 5'
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
@@ -55,3 +58,5 @@ group :test do
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'webdrivers'
 end
+
+
