@@ -46,6 +46,10 @@ group :development do
   # Can be configured to work on production as well see: https://github.com/MiniProfiler/rack-mini-profiler/blob/master/README.md
   gem 'listen', '~> 3.3'
   gem 'rack-mini-profiler', '~> 2.0'
+  gem 'rubocop-rails', '~> 2.10'
+  gem 'rubycritic', '~> 4.6'
+  gem 'rubycritic-small-badge', '~> 0.2.1'
+  gem 'sandi_meter', '~> 1.2'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'web-console', '>= 4.1.0'
@@ -58,5 +62,6 @@ group :test do
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'webdrivers'
 end
+
 
 
