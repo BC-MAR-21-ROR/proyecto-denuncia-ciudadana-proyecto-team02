@@ -19,6 +19,8 @@ gem 'sass-rails', '>= 6'
 gem 'turbolinks', '~> 5'
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
+# Windows Directory Monitor (WDM) is a library which can be used to monitor directories for changes.
+gem 'wdm', '>= 0.1.0', platforms: %i[mingw mswin x64_mingw jruby]
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
 gem 'webpacker', '~> 5.0'
 
