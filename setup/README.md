@@ -29,6 +29,7 @@ Execute project with: `rails server` and `bin/webpack-dev-server`
 
 ### Run Tests
 >Execute  RSpec  tests with: `rspec ./spec -f d`
+>Execute  `rake code_quality` to analize code with rubycritic, sandimeter and update badges
 
 
 ### :information_source: App Demo
