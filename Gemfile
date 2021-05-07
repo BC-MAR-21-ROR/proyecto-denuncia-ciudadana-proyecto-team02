@@ -5,6 +5,10 @@ ruby '2.7.2'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
+# https://github.com/thoughtbot/factory_bot_rails
+gem 'factory_bot_rails', '~> 6.1'
+# https://github.com/faker-ruby/faker
+gem 'faker', '~> 2.17'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.7'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
@@ -62,6 +66,3 @@ group :test do
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'webdrivers'
 end
-
-
-
