@@ -28,8 +28,15 @@ To create and adjust database:
 Execute project with: `rails server` and `bin/webpack-dev-server`
 
 ### Run Tests
+
 >Execute  RSpec  tests with: `rspec ./spec -f d`
 >Execute  `rake code_quality` to analize code with rubycritic, sandimeter and update badges
+
+### Documentation
+
+#### E-R Database Diagram
+
+![E-R Diagrama](../docs/E-R_Database_Diagram.png)
 
 
 ### :information_source: App Demo
