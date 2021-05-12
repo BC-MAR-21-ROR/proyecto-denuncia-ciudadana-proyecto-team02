@@ -54,6 +54,8 @@ group :development do
   # Display performance information such as SQL time and flame graphs for each request in your browser.
   # Can be configured to work on production as well see: https://github.com/MiniProfiler/rack-mini-profiler/blob/master/README.md
   gem 'annotate', '~> 3.1'
+  # Preview email in the default browser instead of sending it: https://github.com/ryanb/letter_opener
+  gem "letter_opener", :group => :development
   gem 'listen', '~> 3.3'
   gem 'rack-mini-profiler', '~> 2.0'
   gem 'rubocop-rails', '~> 2.10'
