@@ -13,6 +13,8 @@
   <body>
     <% if current_user %>
       <%= link_to "Sign out →", destroy_user_session_path, class: "float-end", title: "log-out", 'data-bs-toggle': 'tooltip', method: :delete %>
+    <% else %>
+      <%= link_to "Sign in", new_user_session_path, class: "float-end", title: "log-in", 'data-bs-toggle': 'tooltip'%>
     <% end %>
     <%= render partial: 'partials/messages' %>
     <%= yield %>
