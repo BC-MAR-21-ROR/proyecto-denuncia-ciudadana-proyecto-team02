@@ -7,6 +7,8 @@ ruby '2.7.2'
 gem 'bootsnap', '>= 1.4.4', require: false
 # to use new version of bootstrap https://github.com/bootstrap-ruby/bootstrap_form/tree/bootstrap-5
 # gem "bootstrap_form", git: "https://github.com/bootstrap-ruby/bootstrap_form.git", branch: "bootstrap-5"
+# https://github.com/heartcombo/devise
+gem 'devise'
 gem "bootstrap_form", github: "bootstrap-ruby/bootstrap_form", branch: "bootstrap-5"
 # https://github.com/thoughtbot/factory_bot_rails
 gem 'factory_bot_rails', '~> 6.1'
