@@ -14,6 +14,7 @@
     <% if current_user %>
       <%= link_to "Sign out →", destroy_user_session_path, class: "float-end", title: "log-out", 'data-bs-toggle': 'tooltip', method: :delete %>
     <% end %>
+    <%= render partial: 'partials/messages' %>
     <%= yield %>
   </body>
 </html>
