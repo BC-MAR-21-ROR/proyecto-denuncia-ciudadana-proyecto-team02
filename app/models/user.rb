@@ -30,4 +30,5 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :confirmable
   validates :username, presence: true, format: { with: /\A[A-Za-z0-9]+\z/ }
+  validates :password, presence: true, format: { with: /\A[A-Za-z0-9]+\z/ }
 end
