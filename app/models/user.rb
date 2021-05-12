@@ -11,6 +11,7 @@
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string
+#  role                   :string           default("citizen"), not null
 #  unconfirmed_email      :string
 #  username               :string           not null
 #  created_at             :datetime         not null
@@ -28,5 +29,5 @@ class User < ApplicationRecord
   # :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :confirmable
-  validates :username, presence: true, format: { with: /\A[A-Za-z0-9]+\z/}
+  validates :username, presence: true, format: { with: /\A[A-Za-z0-9]+\z/ }
 end
