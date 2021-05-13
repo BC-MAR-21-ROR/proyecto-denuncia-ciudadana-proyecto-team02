@@ -26,6 +26,10 @@
 #
 FactoryBot.define do
   factory :user do
-    
+    username { Faker::Alphanumeric.unique.alpha }
+    email { Faker::Internet.unique.email }
+    password { Faker::Internet.password }
+    role { 'citizen' }
+    confirmed_at { Date.yesterday }
   end
 end

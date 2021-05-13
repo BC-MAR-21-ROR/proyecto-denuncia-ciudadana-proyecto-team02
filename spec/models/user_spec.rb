@@ -27,5 +27,29 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe '#username' do
+    it 'must be unique' do
+      FactoryBot.create(:user, username: 'jane')
+      user = FactoryBot.build(:user, username: 'jane')
+
+      expect(user).to be_invalid
+      expect(user.errors[:username]).to include('has already been taken')
+    end
+
+    it 'must be alphanumeric' do
+      user = FactoryBot.build(:user, username: 'john_smith')
+
+      expect(user).to be_invalid
+      expect(user.errors[:username]).to include('must be alphanumeric')
+    end
+  end
+
+  describe '#password' do
+    it 'must be alphanumeric' do
+      user = FactoryBot.build(:user, password: 'invalid_password')
+
+      expect(user).to be_invalid
+      expect(user.errors[:password]).to include('must be alphanumeric')
+    end
+  end
 end

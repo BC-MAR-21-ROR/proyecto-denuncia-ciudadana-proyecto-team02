@@ -29,6 +29,10 @@ class User < ApplicationRecord
   # :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :confirmable
-  validates :username, presence: true, format: { with: /\A[A-Za-z0-9]+\z/ }
-  validates :password, presence: true, format: { with: /\A[A-Za-z0-9]+\z/ }
+  validates :username, format: { with: /\A[A-Za-z0-9]+\z/, message: 'must be alphanumeric' },
+                       presence: true,
+                       uniqueness: true
+  validates :password, format: { with: /\A[A-Za-z0-9]+\z/, message: 'must be alphanumeric' },
+                       presence: true,
+                       if: :password
 end
