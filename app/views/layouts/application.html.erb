@@ -11,8 +11,10 @@
   </head>
 
   <body>
-    <%= render partial: 'partials/user_links' %>
-    <%= render partial: 'partials/messages' %>
-    <%= yield %>
+    <div class="container-fluid">
+      <%= render partial: 'partials/user_links' %>
+      <%= render partial: 'partials/messages' %>
+      <%= yield %>
+    </div>
   </body>
 </html>
