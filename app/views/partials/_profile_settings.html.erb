@@ -1,0 +1,35 @@
+<div class="row justify-content-center mt-5">
+  <div class="col-8 order-first">
+    <div class="card shadow">
+      <div class="card-header text-center">
+        <h3>Edit <%= resource_name.to_s.humanize %>
+        </h3>
+      </div>
+      <%= bootstrap_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do
+        |f| %>
+        <%= render "devise/shared/error_messages" , resource: resource %>
+        <div class="card-body p-5 mb-5">
+          <p class="card-text">
+            <%= f.text_field :username, autocomplete: "username", label: "Username" %>
+
+            <%= f.password_field :password, label: "New password", 
+              autofocus: true, autocomplete: "new-password", help: "leave blank if you don't want to change it" %>
+
+            <%= f.password_field :password_confirmation, label:"Confirm new password",
+              autocomplete: "new-password" , placeholder: "Confirm same password as above.", help: "#{@minimum_password_length}  characters minimum " %>
+
+            <%= f.password_field :current_password, autocomplete: "current-password", help: "we need your current password to confirm your changes" %>
+
+            <div class="text-center my-5">
+              Not your screen?, Go <%= link_to "Back" , :back %>
+            </div>
+          </p>
+        </div>
+        <div class="card-footer text-center">
+          <%= f.submit "Edit profile" , class: "btn btn-primary btn-lg ml-5" %>
+          <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, :class=> "btn btn-outline-danger mr-5" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
