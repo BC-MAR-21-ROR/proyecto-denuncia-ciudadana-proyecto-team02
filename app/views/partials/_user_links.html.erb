@@ -1,6 +1,0 @@
-<% if current_user %>
-  <%= link_to "Sign out →", destroy_user_session_path, class: "float-end", title: "log-out", 'data-bs-toggle': 'tooltip', method: :delete %>
-  <%= link_to "Profile settings", edit_user_registration_path, class: "float-end mx-3" %>
-<% else %>
-  <%= link_to "Sign in", new_user_session_path, class: "float-end", title: "log-in", 'data-bs-toggle': 'tooltip'%>
-<% end %>
