@@ -7,6 +7,8 @@ ruby '2.7.2'
 gem 'bootsnap', '>= 1.4.4', require: false
 # to use new version of bootstrap https://github.com/bootstrap-ruby/bootstrap_form/tree/bootstrap-5
 # gem "bootstrap_form", git: "https://github.com/bootstrap-ruby/bootstrap_form.git", branch: "bootstrap-5"
+# https://github.com/heartcombo/devise
+gem 'devise'
 gem "bootstrap_form", github: "bootstrap-ruby/bootstrap_form", branch: "bootstrap-5"
 # https://github.com/thoughtbot/factory_bot_rails
 gem 'factory_bot_rails', '~> 6.1'
@@ -22,9 +24,6 @@ gem 'pg'
 gem 'puma', '~> 5.0'
 # Use SCSS for stylesheets
 gem 'sass-rails', '>= 6'
-# SimpleCov is a code coverage https://github.com/simplecov-ruby/simplecov/
-gem "simplecov", "0.17"
-gem "simplecov-small-badge", "~> 0.2.4"
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 gem 'turbolinks', '~> 5'
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
@@ -52,6 +51,8 @@ group :development do
   # Display performance information such as SQL time and flame graphs for each request in your browser.
   # Can be configured to work on production as well see: https://github.com/MiniProfiler/rack-mini-profiler/blob/master/README.md
   gem 'annotate', '~> 3.1'
+  # Preview email in the default browser instead of sending it: https://github.com/ryanb/letter_opener
+  gem "letter_opener", :group => :development
   gem 'listen', '~> 3.3'
   gem 'rack-mini-profiler', '~> 2.0'
   gem 'rubocop-rails', '~> 2.10'
@@ -67,6 +68,9 @@ group :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 3.26'
   gem 'selenium-webdriver'
+  # SimpleCov is a code coverage https://github.com/simplecov-ruby/simplecov/
+  gem "simplecov"
+  gem "simplecov-small-badge"
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'webdrivers'
 end
