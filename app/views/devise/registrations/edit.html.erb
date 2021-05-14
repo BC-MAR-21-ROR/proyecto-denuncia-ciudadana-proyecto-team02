@@ -1,18 +1,20 @@
-<div class="row">
-  <div class="col-3">
-    <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-      <a class="nav-link active" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="true">Profile</a>
-      <%# poi == places of interest %>
-      <a class="nav-link" id="v-pills-poi-tab" data-toggle="pill" href="#v-pills-poi" role="tab" aria-controls="v-pills-poi" aria-selected="false">Places of interest</a> 
-    </div>
-  </div>
-  <div class="col-9">
-    <div class="tab-content" id="v-pills-tabContent">
-      <div class="tab-pane fade show active" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
-        ...
-        <%= render partial: "partials/profile_settings" %>
+<div class="row justify-content-center mt-5">
+  <div class="col-8">
+    <div class="d-flex align-items-start">
+      <div class="nav flex-grow-1 flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+        <button class="nav-link active" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile"
+          type="button" role="tab" aria-controls="v-pills-profile" aria-selected="true">Profile</button>
+        <button class="nav-link" id="v-pills-home-tab" data-bs-toggle="pill" data-bs-target="#v-pills-home"
+          type="button" role="tab" aria-controls="v-pills-home" aria-selected="false">Places of Interest</button>
       </div>
-      <div class="tab-pane fade" id="v-pills-poi" role="tabpanel" aria-labelledby="v-pills-poi-tab">...</div>
+      <div class="tab-content flex-fill" id="v-pills-tabContent">
+        <div class="tab-pane fade show active" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+          <%= render partial: "partials/profile_settings" %>
+        </div>
+        <div class="tab-pane fade" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+          ...
+        </div>
+      </div>
     </div>
   </div>
 </div>
