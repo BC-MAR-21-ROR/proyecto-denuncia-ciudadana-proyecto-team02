@@ -1,16 +1,24 @@
-<h2>Forgot your password?</h2>
-
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+<div class="row justify-content-center mt-5">
+  <div class="col-4">
+    <div class="card shadow">
+      <div class="card-header text-center">
+        <h3>Reset Password</h3>
+      </div>
+      <%= bootstrap_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post
+          }) do |f| %>
+        <div class="card-body p-5 mx-5">
+          <p class="card-text">
+              <%= f.email_field :email, autofocus: true, autocomplete: "email" , placeholder: "Ex: example@domain.com" ,
+                help: "You need to provide an existing email." %>
+          </p>
+          <div class="text-center p-5 mt-5">
+            Not your screen? <%= render "devise/shared/links" %>
+          </div>
+        </div>
+        <div class="card-footer text-center">
+          <%= f.submit "Reset Password" , class: "btn btn-primary" %>
+        </div>
+      <% end %>
+    </div>
   </div>
-
-  <div class="actions">
-    <%= f.submit "Send me reset password instructions" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</div>
