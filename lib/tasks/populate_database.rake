@@ -12,6 +12,7 @@ def create_state_data(states, settlements)
         name: municipality_name,
         state: state
       )
+      print '.'
       settlements.each { |s|
         s.delete(:municipality)
         s[:created_at] = Time.now
@@ -19,14 +20,18 @@ def create_state_data(states, settlements)
       }
       municipality.settlements.insert_all(settlements)
     end
+    puts "\nCreated municipalities and settlements for #{state_name} 🍺"
   end
 end
 task populate_database: :environment do
-  filename = Rails.root.join('docs', 'settlements.xlsx').to_s
-  file = Roo::Spreadsheet.open(filename, extension: :xlsx)
-  thr = []
-  file.sheets.each_slice(8) do |array_states|
-    thr << Thread.new { create_state_data(array_states, file) }
+  unless Settlement.any?
+    filename = Rails.root.join('docs', 'settlements.xlsx').to_s
+    file = Roo::Spreadsheet.open(filename, extension: :xlsx)
+    thr = []
+    file.sheets.each_slice(8) do |array_states|
+      thr << Thread.new { create_state_data(array_states, file) }
+    end
+    thr.each(&:join)
+    puts "#{Settlement.count}  settlements created 🍻"
   end
-  thr.each(&:join)
 end
