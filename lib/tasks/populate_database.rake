@@ -1,20 +1,23 @@
+# Create settlements for a group of states
 def create_state_data(states, settlements)
   states.each do |state_name|
     state = State.find_or_create_by(name: state_name)
-    settlements.sheet(state_name).parse(
+    municipalities = settlements.sheet(state_name).parse(
       postal_code: 'd_codigo',
       municipality: 'D_mnpio',
-      settlement: 'd_asenta'
-    ).each do |hash|
+      name: 'd_asenta'
+    ).group_by { |settlement| settlement[:municipality] }
+    municipalities.each do |municipality_name, settlements|
       municipality = Municipality.find_or_create_by(
-        name: hash.fetch(:municipality),
+        name: municipality_name,
         state: state
       )
-      Settlement.find_or_create_by(
-        postal_code: hash.fetch(:postal_code),
-        name: hash.fetch(:settlement),
-        municipality: municipality
-      )
+      settlements.each { |s|
+        s.delete(:municipality)
+        s[:created_at] = Time.now
+        s[:updated_at] = Time.now
+      }
+      municipality.settlements.insert_all(settlements)
     end
   end
 end
