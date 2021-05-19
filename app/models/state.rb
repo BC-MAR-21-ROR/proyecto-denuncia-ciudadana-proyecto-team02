@@ -8,4 +8,6 @@
 #  updated_at :datetime         not null
 #
 class State < ApplicationRecord
+  has_many :municipalities
+  has_many :settlements, through: :municipalities
 end
