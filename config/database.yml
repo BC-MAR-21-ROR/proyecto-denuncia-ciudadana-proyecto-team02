@@ -1,0 +1,32 @@
+default: &default
+  adapter: postgresql
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: postgres
+  timeout: 5000
+  host: localhost
+  port: 5432
+
+aws: &aws
+  url: <%= ENV.fetch("PROVINCES_DATABASE_URL", "") %>
+  migrations_paths: db/provinces_migrate
+
+development:
+  primary:
+    <<: *default
+    database: denuncia_ciudadana_dev
+  provinces:
+    <<: *aws
+
+test:
+  primary:
+    <<: *default
+    database: denuncia_ciudadana_test
+  provinces:
+    <<: *aws
+
+
+production:
+  primary:
+    url: <%= ENV["DATABASE_URL"] %>
+  provinces:
+    <<: *aws
