@@ -17,6 +17,6 @@
 #
 #  fk_rails_...  (municipality_id => municipalities.id)
 #
-class Settlement < ApplicationRecord
+class Settlement < ApplicationRecordAws
   belongs_to :municipality
 end

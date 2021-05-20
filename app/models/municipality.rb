@@ -16,7 +16,7 @@
 #
 #  fk_rails_...  (state_id => states.id)
 #
-class Municipality < ApplicationRecord
+class Municipality < ApplicationRecordAws
   belongs_to :state
   has_many :settlements
 end

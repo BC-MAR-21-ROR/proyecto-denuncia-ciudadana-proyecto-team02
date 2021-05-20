@@ -7,7 +7,7 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
-class State < ApplicationRecord
+class State < ApplicationRecordAws
   has_many :municipalities
   has_many :settlements, through: :municipalities
 end
