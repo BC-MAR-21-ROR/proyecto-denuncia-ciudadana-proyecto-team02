@@ -1,8 +1,8 @@
 <div class="row justify-content-center mt-5">
-	<div class="col-4">   
-		<div class="card mb-3 shadow " >
+  <div class="col-xs-12 col-md-6 col-xl-4">
+    <div class="card mb-3 shadow " >
       <div class="card-header text-center">
-				<h3>Log in</h3>
+        <h3>Log in</h3>
       </div>
       <%= bootstrap_form_for(resource, as: resource_name, url: session_path(resource_name), layout: :horizontal, label_col: "col-sm-12", control_col: "col-sm-12", inline_errors: true) do |f| %>
         <div class="card-body mx-5 my-5">
@@ -12,7 +12,7 @@
           </div>
 
           <div class="field">
-            <%= f.password_field :password, autocomplete: "current-password" %>
+            <%= f.password_field :password, autocomplete: "current-password", placeholder: "myPassword1234" %>
           </div>
 
           <% if devise_mapping.rememberable? %>
@@ -26,10 +26,10 @@
         </div>
         <div class="card-footer text-center">
           <div class="actions">
-            <%= f.submit "Sign In", class: "btn btn-primary mx-3" %>
+            <%= f.submit "Sign In", class: "btn btn-primary mx-3 btn-lg" %>
           </div>
         </div>
       <% end %>
-		</div>
-	</div>
+    </div>
+  </div>
 </div>

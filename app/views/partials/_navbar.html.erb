@@ -1,11 +1,12 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-  <a class="navbar-brand mx-3" href="/">Citizen Alert</a>
+<nav class="navbar navbar-expand-md navbar-dark bg-primary">
+<div class="container-fluid">
+<a class="navbar-brand mx-3" href="/">Citizen Alert</a>
   <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
     aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="collapse navbar-collapse d-flex justify-content-end px-5" id="navbarNavDropdown">
-    <ul class="navbar-nav mx-5">
+  <div class="collapse navbar-collapse d-md-flex justify-content-md-end px-md-5" id="navbarNavDropdown">
+    <ul class="navbar-nav mx-md-5">
       <li class="nav-item">
         <a class="nav-link active " aria-current="page" href="/">Home</a>
       </li>
@@ -18,7 +19,7 @@
             data-bs-toggle="dropdown" aria-expanded="false">
             <%= current_user.username %>
           </a>
-          <ul class="dropdown-menu mt-5" aria-labelledby="navbarDropdownMenuLink">
+          <ul class="dropdown-menu mt-md-5" aria-labelledby="navbarDropdownMenuLink">
             <li>
               <%= link_to edit_user_registration_path, class: "dropdown-item d-flex align-items-center" do %>
                 <i class="bi bi-gear mx-4"></i> Profile settings 
@@ -39,4 +40,5 @@
       <% end %>
     </ul>
   </div>
+</div>
 </nav>
