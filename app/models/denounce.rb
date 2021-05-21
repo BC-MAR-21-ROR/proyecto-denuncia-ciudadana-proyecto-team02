@@ -3,7 +3,7 @@
 # Table name: denounces
 #
 #  id          :bigint           not null, primary key
-#  anonymouse  :boolean
+#  anonymouse  :boolean          default(FALSE)
 #  area        :integer
 #  description :string
 #  event_date  :date
