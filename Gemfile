@@ -70,6 +70,7 @@ group :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 3.26'
   gem 'selenium-webdriver'
+  gem 'shoulda-matchers', '~> 4.5', '>= 4.5.1'
   # SimpleCov is a code coverage https://github.com/simplecov-ruby/simplecov/
   gem "simplecov"
   gem "simplecov-small-badge"
