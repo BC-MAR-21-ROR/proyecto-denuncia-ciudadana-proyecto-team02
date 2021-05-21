@@ -3,7 +3,7 @@
 # Table name: denounces
 #
 #  id          :bigint           not null, primary key
-#  anonymouse  :boolean
+#  anonymouse  :boolean          default(FALSE)
 #  area        :integer
 #  description :string
 #  event_date  :date
@@ -19,7 +19,7 @@ FactoryBot.define do
     area { Faker::Number.between(from: 0, to: 6) }
     description { Faker::Lorem.paragraph }
     # address_id {1}
-    anonymouse { Faker::Boolean.boolean }
+    anonymouse { [true, false].sample }
     user
   end
 end
