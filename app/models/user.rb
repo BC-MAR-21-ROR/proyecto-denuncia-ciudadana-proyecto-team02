@@ -35,4 +35,5 @@ class User < ApplicationRecord
   validates :password, format: { with: /\A[A-Za-z0-9]+\z/, message: 'must be alphanumeric' },
                        presence: true,
                        if: :password
+  has_many :denounces
 end

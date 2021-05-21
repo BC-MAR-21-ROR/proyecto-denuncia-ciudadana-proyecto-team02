@@ -1,0 +1,26 @@
+<%= bootstrap_form_with(model: denounce, layout: :horizontal, label_col: "col-sm-12", control_col: "col-sm-12", inline_errors: true) do |form| %>
+  <div class="card-body mx-4 my-4">
+    <div class="field"><%= form.datetime_select :event_date %></div>
+
+    <%= form.select :area, Denounce.areas.keys %>
+
+    <div class="field"><%= form.text_field :title %></div>
+
+    <div class="field"><%= form.text_field :description %></div>
+
+    <div class="field"><%= form.check_box :anonymouse, label: "Make it anonymous" %></div>
+  </div>
+
+  <div class="card-footer">
+    <div class="row">
+      <div class="col-5 justify-content-start">
+        <%= link_to 'Back', denounces_path, class: "btn btn-dark" %>
+      </div>
+      <div class="col-7 justify-content-center">
+        <div class="actions">
+          <%= form.submit "Save", class: "btn btn-primary" %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
