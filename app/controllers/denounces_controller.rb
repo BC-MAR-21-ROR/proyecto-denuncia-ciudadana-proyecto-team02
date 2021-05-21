@@ -4,7 +4,7 @@ class DenouncesController < ApplicationController
 
   # GET /denounces
   def index
-    @denounces = Denounce.all.order(created_at: :asc)
+    @denounces = current_user.denounces.order(created_at: :asc)
   end
 
   # GET /denounces/1
