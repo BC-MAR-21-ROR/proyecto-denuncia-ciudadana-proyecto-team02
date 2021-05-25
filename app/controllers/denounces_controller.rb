@@ -13,6 +13,7 @@ class DenouncesController < ApplicationController
   # GET /denounces/new
   def new
     @denounce = Denounce.new
+    @states = State.all
   end
 
   # GET /denounces/1/edit
@@ -51,11 +52,12 @@ class DenouncesController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_denounce
-    @denounce = Denounce.find(params[:id])
+    @denounce = current_user.denounces.find(params[:id])
   end
 
   # Only allow a list of trusted parameters through.
   def denounce_params
+    # TODO ACEPT ADDRESS PARAMETERS
     params.require(:denounce).permit(:event_date, :area, :title, :description, :likes, :anonymouse)
   end
 end
