@@ -22,6 +22,8 @@ ActiveRecord::Schema.define(version: 2021_05_21_181528) do
     t.string "postal_code"
     t.string "municipality"
     t.string "state"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "denounces", force: :cascade do |t|
