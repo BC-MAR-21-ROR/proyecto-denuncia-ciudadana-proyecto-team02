@@ -24,18 +24,18 @@ class DenouncesController < ApplicationController
     if @denounce.save
       redirect_to denounces_path, flash: { notice: 'Denounce was successfully created.' }
     else
-      render :new, flash: { error: "Sorry , denounce couldn't be created " }
+      flash[:error] = "Sorry , denounce couldn't be created "
+      render :new
     end
   end
 
   # PATCH/PUT /denounces/1
   def update
-    respond_to do |format|
-      if @denounce.update(denounce_params)
-        format.html { redirect_to @denounce, notice: 'Denounce was successfully updated.' }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-      end
+    if @denounce.update(denounce_params)
+      redirect_to @denounce, notice: 'Denounce was successfully updated.'
+    else
+      flash[:error] = "Sorry, denounce couldn't be updated"
+      render :edit
     end
   end
 
