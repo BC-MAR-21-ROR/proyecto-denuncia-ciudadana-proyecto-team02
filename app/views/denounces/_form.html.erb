@@ -1,22 +1,50 @@
-<%= bootstrap_form_with(model: denounce, layout: :horizontal, label_col: "col-sm-12", control_col: "col-sm-12", inline_errors: true) do |form| %>
+
+<%= javascript_pack_tag 'addressSelectors.js' %>
+<%= bootstrap_form_with(model: denounce, layout: :horizontal, label_col: "col-12", control_col: "col-12", inline_errors: true) do |form| %>
   <div class="card-body mx-4 my-4">
-    <div class="field"><%= form.datetime_select :event_date %></div>
+    <div class="row">
+      <div class="col-12 col-lg-6">
+        <h3>Denounce Information</h3>
+        <%= form.datetime_select :event_date %>
+        <%= form.select :area, Denounce.areas.keys %>
+        <%= form.text_field :title %>
+        <%= form.text_field :description %>
+        <%= form.check_box :anonymouse, label: "Make it anonymous" %>
+      </div>
 
-    <%= form.select :area, Denounce.areas.keys %>
-
-    <div class="field"><%= form.text_field :title %></div>
-
-    <div class="field"><%= form.text_field :description %></div>
-
-    <div class="field"><%= form.check_box :anonymouse, label: "Make it anonymous" %></div>
+      <div class="col-12 col-lg-6">
+        <h3>Address</h3>
+        <%= form.fields_for :address, denounce.address || Address.new do |form_field| %>
+          <div class="row">
+            <div class="col-lg-6"><%= form_field.text_field :street, label: "Street" %></div>
+            <div class="col-lg-4"><%= form_field.text_field :number, label: "Number" %></div>
+          </div>
+          <div class="row">
+            <div class="col-lg-5">
+              <%= form_field.select :state, State.all.collect { |s| s.name }, id: :state, class:"statesSelector", required:true %>
+            </div>
+            <div class="col-lg-5">
+              <%= form_field.select :municipality, (@denounce.address) ? State.find_by(name: @denounce.address.state).municipalities.collect { |m| [m.name, m.id]} :  [[@municipality.to_s, 1], [@state.to_s, 2]],  id: :municipality , required:true, selected: @municipality %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-5">
+              <%= form_field.select :settlement, { }, { id:"settlement_selector", required:true } %>
+            </div>
+            <div class="col-lg-5">
+              <%= form_field.text_field :postal_code, label: "Postal Code",  id: "postalCodeInput"%>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
   </div>
-
   <div class="card-footer">
     <div class="row">
       <div class="col-5 justify-content-start">
         <%= link_to 'Back', denounces_path, class: "btn btn-dark" %>
       </div>
-      <div class="col-7 justify-content-center">
+      <div class="col-6 justify-content-start ms-xs-0 ms-sm-2 ms-lg-4">
         <div class="actions">
           <%= form.submit "Save", class: "btn btn-primary" %>
         </div>

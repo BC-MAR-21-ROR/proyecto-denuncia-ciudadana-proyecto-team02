@@ -57,7 +57,14 @@ class DenouncesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def denounce_params
-    # TODO ACEPT ADDRESS PARAMETERS
-    params.require(:denounce).permit(:event_date, :area, :title, :description, :likes, :anonymouse)
+    # TODO: ACEPT ADDRESS PARAMETERS
+    params.require(:denounce).permit(
+      :event_date,
+      :area,
+      :title,
+      :description,
+      :anonymouse,
+      address_attributes: [:id, :state, :municipality, :settlement, :postal_code]
+    )
   end
 end
