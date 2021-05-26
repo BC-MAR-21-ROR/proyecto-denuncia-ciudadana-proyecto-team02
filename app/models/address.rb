@@ -13,5 +13,7 @@
 #  updated_at   :datetime         not null
 #
 class Address < ApplicationRecord
-  belongs_to :settlement
+  validates :state, :municipality, :postal_code, :settlement, presence: true
+  belongs_to :denounce
+  # belongs_to :settlement
 end

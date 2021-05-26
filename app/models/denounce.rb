@@ -16,5 +16,6 @@ class Denounce < ApplicationRecord
   enum area: %i[security services infrastructure theft bribery abuse transit]
   validates :area, :title, :description, presence: true
   belongs_to :user
-  # belongs_to :address
+  has_one :address, dependent: :destroy
+  accepts_nested_attributes_for :address, allow_destroy: true
 end
