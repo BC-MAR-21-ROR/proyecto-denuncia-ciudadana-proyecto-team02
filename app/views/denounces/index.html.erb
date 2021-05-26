@@ -2,18 +2,18 @@
   <div class="col-xs-12 col-lg-10">
     <div class="card border-primary">
       <div class="card-body">
-        <div class="row d-flex justify-content-xs-center align-items-center">
+        <div class="row d-flex align-items-center">
           <div class="col-xs-10 col-lg-6">
-            <form class="row">
-              <div class="col-xs-2 col-sm-5">
+            <form class="row d-flex justify-content-xs-center">
+              <div class="col-xs-3 col-sm-6">
                 <input class="form-control" type="search" placeholder="Search" aria-label="Search">
               </div>
-              <div class="col-xs-5 col-md-5">
-                <button class="btn btn-secondary" type="submit"><i class="bi bi-search">  Search</i></button>
+              <div class="col-xs-6 col-sm-5">
+                <button class="btn btn-secondary my-xs-2" type="submit"><i class="bi bi-search mt-xs-2">  Search</i></button>
               </div>
             </form>
           </div>
-          <div class="col-xs-12 col-lg-6 d-flex justify-content-xs-start justify-content-lg-end">
+          <div class="col-xs-12 col-lg-6 d-flex justify-content-xs-center justify-content-lg-end">
             <%= link_to new_denounce_path, class: "btn btn-outline-primary my-2" do %>
               <i class="bi bi-plus-circle">  Add new Denounce</i>
             <% end %>
@@ -22,56 +22,91 @@
       </div>
     </div>
   </div>
-  <div class="col-xs-12 col-md-10 my-4 text-center">
-    <h2>My Denounces</h2>
+  <div class="col-xs-12 col-md-10 my-4">
+    <h2 class="text-center">My Denounces</h2>
     <hr class="my-4">
-    <div class="accordion my-5" id="accordionDenounces">
-      <% @denounces.each do |denounce| %>
-          <div class="accordion-item" >
-            <div class="accordion-header d-flex flex-row align-items-center justify-content-between my-1 flex-wrap flex-sm-nowrap" id=<%= "denouncesHeading-#{denounce.id}"%>>
-              <div class="p-2">
-                Date: <%= Time.at(denounce.created_at.to_i).to_formatted_s(:long_ordinal) %>
-              </div>
-              <div class="p-2">
-                Title: <%= (denounce.title) ? denounce.title : "empty" %>
-              </div>
-              <button class="btn btn-link" type="button" data-bs-toggle="collapse" data-bs-target=<%= "#collapse-#{denounce.id}" %> aria-expanded="false" aria-controls=<%= "collapse-#{denounce.id}" %> title="Display">
-                <i class="bi bi-arrow-down-circle"></i>
-              </button>
-              <div class="btn-group" role="group" aria-label="Basic outlined example">
-                <%= link_to denounce_path(denounce), class: "btn btn-link" , title: "Show" , "data-bs-toggle"=> :tooltip do %>
-                  <i class="bi bi-eye"></i>
-                <% end %>
-                <%= link_to edit_denounce_path(denounce), class: "btn", title: "Edit" , "data-bs-toggle"=> :tooltip do %> 
-                  <i class="bi bi-pencil mx-2"></i>
-                <% end %>
-                <%= link_to denounce_path(denounce), method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-link text-danger", title: "Delete", "data-bs-toggle"=> :tooltip  do %>
-                  <i class="bi bi-trash"></i>
-                <% end %>
-              </div>
-            </div>
-            <div id=<%= "collapse-#{denounce.id}" %> class="accordion-collapse collapse" aria-labelledby=<%= "denouncesHeading-#{denounce.id}" %> data-parent="#accordionDenounces">
-              <div class="accordion-body">
-                <div class="row align-items-start">
-                  <div class="col">
-                  Description: <%= denounce.description %>
+    <div class="row">
+      <div class="accordion my-5" id="accordionDenounces">
+        <% @denounces.each do |denounce| %>
+          <div class="col-xs-12">
+            <div class="accordion-item" >
+              <div class="accordion-header" id=<%= "denouncesHeading-#{denounce.id}"%>>
+                <div class="row my-1 justify-content-between align-items-lg-center">
+                  <div class="col-xs-12 col-lg-3 d-flex justify-content-center">
+                    Date: <%= Time.at(denounce.created_at.to_i).to_formatted_s(:long_ordinal) %>
                   </div>
-                  <div class="col">
-                    Area:<span class="badge rounded-pill bg-info text-dark">
-                      <%= denounce.area %>
-                    </span>
+                  <div class="col-xs-12 col-lg-3 d-flex justify-content-center justify-content-lg-start m-lg-0">
+                    Title: <%= (denounce.title) ? denounce.title : "empty" %>
                   </div>
-                  <div class="col">
-                    is anonymouse?: <%= (denounce.anonymouse) ? "yes" : "Not" %>
+                  <div class="col-xs-12 col-lg-3 d-flex justify-content-center justify-content-lg-end">
+                    <div class="row">
+                      <div class="col m-lg-0 p-lg-0">
+                        <%= link_to denounce_path(denounce), class: "btn btn-link" , title: "Show" , "data-bs-toggle"=> :tooltip do %>
+                          <i class="bi bi-eye"></i>
+                        <% end %>
+                      </div>
+                      <div class="col m-lg-0 p-lg-0">
+                        <%= link_to edit_denounce_path(denounce), class: "btn", title: "Edit" , "data-bs-toggle"=> :tooltip do %> 
+                          <i class="bi bi-pencil"></i>
+                        <% end %>
+                      </div>
+                      <div class="col m-lg-0 p-lg-0">
+                        <%= link_to denounce_path(denounce), method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-link text-danger", title: "Delete", "data-bs-toggle"=> :tooltip  do %>
+                          <i class="bi bi-trash"></i>
+                        <% end %>
+                      </div>
+                    </div>
                   </div>
-                  <div class="col">
-                    Event date: <%= denounce.event_date %>
+                  <div class="col-xs-12 col-lg-1 d-flex justify-content-center">
+                    <button class="btn btn-link" type="button" data-bs-toggle="collapse" data-bs-target=<%= "#collapse-#{denounce.id}" %> aria-expanded="false" aria-controls=<%= "collapse-#{denounce.id}" %> title="Display">
+                      <i class="bi bi-arrow-down-circle"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div id=<%= "collapse-#{denounce.id}" %> class="accordion-collapse collapse" aria-labelledby=<%= "denouncesHeading-#{denounce.id}" %> data-parent="#accordionDenounces">
+                <hr class="my-2">
+                <div class="accordion-body">
+                  <div class="row align-items-xs-start">
+                    <div class="col-xs-12 col-md-6">
+                      <div class="row">
+                        <div class="col-xs-12 my-1">
+                          Description: <%= denounce.description %>
+                        </div>
+                        <div class="col-xs-12 my-1">
+                          Area:<span class="badge rounded-pill bg-info text-dark">
+                            <%= denounce.area %>
+                          </span>
+                        </div>
+                        <div class="col-xs-12 my-1">
+                          is anonymouse?: <%= (denounce.anonymouse) ? "yes" : "Not" %>
+                        </div>
+                        <div class="col-xs-12 my-1">
+                          Event date: <%= denounce.event_date %>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-xs-12 col-md-6">
+                      <div class="col-xs-12 my-1">
+                        Address: <%= (denounce.address) ? denounce.address.state: "No hay"  %>
+                      </div>
+                      <div class="col-xs-12 my-1">
+                        Municipality: <%= (denounce.address) ? denounce.address.municipality: "No hay"  %>
+                      </div>
+                      <div class="col-xs-12 my-1">
+                        Street & number: <%= (denounce.address) ? denounce.address.street: "No hay"  %> # <%= (denounce.address) ? denounce.address.number: "No tiene"  %>
+                      </div>
+                      <div class="col-xs-12 my-1">
+                        P.C.: <%= (denounce.address) ? denounce.address.postal_code: "No hay"  %>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-      <% end %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
