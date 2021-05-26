@@ -21,5 +21,6 @@ FactoryBot.define do
     # address_id {1}
     anonymouse { [true, false].sample }
     user
+    address { association :address, denounce: instance }
   end
 end
