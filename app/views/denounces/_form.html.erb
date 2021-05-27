@@ -22,7 +22,7 @@
           <div class="row">
             <div class="col-lg-5">
               <%= form_field.select :state,
-                State.all.collect { |s| s.name },
+                State.all.order(name: :asc).collect { |s| s.name },
                 { include_blank: true },
                 { class: "statesSelector", required: true }
               %>
