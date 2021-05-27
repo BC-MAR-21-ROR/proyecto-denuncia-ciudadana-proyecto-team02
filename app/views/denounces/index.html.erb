@@ -46,7 +46,7 @@
                         <% end %>
                       </div>
                       <div class="col m-lg-0 p-lg-0">
-                        <%= link_to edit_denounce_path(denounce), class: "btn", title: "Edit" , "data-bs-toggle"=> :tooltip do %> 
+                        <%= link_to edit_denounce_path(denounce), class: "btn", title: "Edit" , "data-bs-toggle"=> :tooltip do %>
                           <i class="bi bi-pencil"></i>
                         <% end %>
                       </div>
@@ -86,20 +86,26 @@
                         </div>
                       </div>
                     </div>
-                    <div class="col-xs-12 col-md-6">
-                      <div class="col-xs-12 my-1">
-                        Address: <%= (denounce.address) ? denounce.address.state: "No hay"  %>
+                    <% if denounce.address %>
+                      <div class="col-xs-12 col-md-6">
+                        <div class="col-xs-12 my-1">
+                          <h4>Address:</h4>
+                          State: <%= denounce.address.state  %>
+                        </div>
+                        <div class="col-xs-12 my-1">
+                          Municipality: <%= denounce.address.municipality %>
+                        </div>
+                        <div class="col-xs-12 my-1">
+                          Settlement: <%= denounce.address.settlement %>
+                        </div>
+                        <div class="col-xs-12 my-1">
+                          Street & number: <%= denounce.address.street %> # <%= denounce.address.number  %>
+                        </div>
+                        <div class="col-xs-12 my-1">
+                          P.C.: <%=  denounce.address.postal_code %>
+                        </div>
                       </div>
-                      <div class="col-xs-12 my-1">
-                        Municipality: <%= (denounce.address) ? denounce.address.municipality: "No hay"  %>
-                      </div>
-                      <div class="col-xs-12 my-1">
-                        Street & number: <%= (denounce.address) ? denounce.address.street: "No hay"  %> # <%= (denounce.address) ? denounce.address.number: "No tiene"  %>
-                      </div>
-                      <div class="col-xs-12 my-1">
-                        P.C.: <%= (denounce.address) ? denounce.address.postal_code: "No hay"  %>
-                      </div>
-                    </div>
+                    <% end %>
                   </div>
                 </div>
               </div>
