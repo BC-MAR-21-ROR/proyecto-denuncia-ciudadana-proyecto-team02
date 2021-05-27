@@ -1,4 +1,4 @@
 class ApplicationRecordAws < ActiveRecord::Base
   self.abstract_class = true
-  establish_connection ENV.fetch("PROVINCES_DATABASE_URL", "")
+  establish_connection Rails.application.credentials.provinces_database_url
 end
