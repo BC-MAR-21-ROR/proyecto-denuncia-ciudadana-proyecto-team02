@@ -10,7 +10,7 @@ function init() {
   municipalitySelector.disabled = toggle;
   settlementSelector.disabled = toggle;
   postalCodeInput.disabled = toggle;
-  
+
     // caching
     let currentSettlements = [];
 
@@ -19,9 +19,11 @@ function init() {
       municipalitySelector.innerHTML = ""
       const municipalities = await newRequest(`/api/municipalities?state=${value}`)
       console.info("Selected municipallies:", municipalities);
+      let optionIncludeBlank = document.createElement("option");
+      municipalitySelector.add(optionIncludeBlank);
       for (const municipality of municipalities) {
         const option = document.createElement("option");
-        
+
         option.text = municipality.name;
         municipalitySelector.add(option)
       }
@@ -31,20 +33,22 @@ function init() {
     })
 
     municipalitySelector.addEventListener('change', async function (event) {
-      debugger
+      // debugger
 
       let value = event.target.value || municipalitySelector.nodeValue
       settlementSelector.innerHTML = ""
       const settlements = await newRequest(`/api/settlements?municipality=${value}`)
       console.info("Selected settlements:", settlements);
-      
+
       currentSettlements = [];
+      let optionIncludeBlank = document.createElement("option");
+      settlementSelector.add(optionIncludeBlank);
+
       for (const settlement of settlements) {
         const option = document.createElement("option");
         // option.name = settlement.name;
         option.text = settlement.name;
         settlementSelector.add(option);
-        postalCodeInput.value = settlement.postal_code;
         currentSettlements.push(settlement);
 
       }
@@ -55,7 +59,7 @@ function init() {
     settlementSelector.addEventListener('change', function (event) {
       let value = event.target.value || settlementSelector.nodeValue
       const filteredSettlement = currentSettlements.find(settlementCache => settlementCache.name === value);
-      
+
       postalCodeInput.value = filteredSettlement.postal_code
       postalCodeInput.disabled = false;
     })

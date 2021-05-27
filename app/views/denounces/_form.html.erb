@@ -21,7 +21,7 @@
           </div>
           <div class="row">
             <div class="col-lg-5">
-              <%= form_field.select :state, State.all.collect { |s| s.name }, id: :state, class:"statesSelector", required:true %>
+              <%= form_field.select :state, State.all.collect { |s| s.name }, { include_blank: true }, { class: "statesSelector", required: true } %>
             </div>
             <div class="col-lg-5">
               <%= form_field.select :municipality, (@denounce.address) ? State.find_by(name: @denounce.address.state).municipalities.collect { |m| [m.name, m.id]} :  [[@municipality.to_s, 1], [@state.to_s, 2]],  id: :municipality , required:true, selected: @municipality %>
