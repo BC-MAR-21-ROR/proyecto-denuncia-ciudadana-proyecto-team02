@@ -1,4 +1,4 @@
 class ApplicationRecordAws < ActiveRecord::Base
   self.abstract_class = true
-  connects_to database: { writing: :provinces, reading: :provinces }
+  establish_connection ENV.fetch("PROVINCES_DATABASE_URL", "")
 end
