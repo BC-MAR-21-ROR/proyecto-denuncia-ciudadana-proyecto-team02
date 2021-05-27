@@ -21,15 +21,23 @@
           </div>
           <div class="row">
             <div class="col-lg-5">
-              <%= form_field.select :state, State.all.collect { |s| s.name }, { include_blank: true }, { class: "statesSelector", required: true } %>
+              <%= form_field.select :state,
+                State.all.collect { |s| s.name },
+                { include_blank: true },
+                { class: "statesSelector", required: true }
+              %>
             </div>
             <div class="col-lg-5">
-              <%= form_field.select :municipality, (@denounce.address) ? State.find_by(name: @denounce.address.state).municipalities.collect { |m| [m.name, m.id]} :  [[@municipality.to_s, 1], [@state.to_s, 2]],  id: :municipality , required:true, selected: @municipality %>
+              <%= form_field.select :municipality,
+                (@denounce.address) ? State.find_by(name: @denounce.address.state).municipalities.collect { |m| m.name } : [],
+                id: :municipality,
+                required:true
+              %>
             </div>
           </div>
           <div class="row">
             <div class="col-lg-5">
-              <%= form_field.select :settlement, { }, { id:"settlement_selector", required:true } %>
+              <%= form_field.select :settlement, (@denounce.address) ? Municipality.find_by(name: @denounce.address.municipality).settlements.collect { |m| m.name } : [] , { required: true } %>
             </div>
             <div class="col-lg-5">
               <%= form_field.text_field :postal_code, label: "Postal Code",  id: "postalCodeInput"%>

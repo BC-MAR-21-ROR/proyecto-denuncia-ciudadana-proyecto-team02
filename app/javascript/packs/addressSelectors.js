@@ -27,6 +27,10 @@ function init() {
         option.text = municipality.name;
         municipalitySelector.add(option)
       }
+
+      //disable to reset data
+      settlementSelector.value = "Choose one"
+      postalCodeInput.value = ""
       settlementSelector.disabled = true
       postalCodeInput.disabled = true;
       municipalitySelector.disabled = false
@@ -53,6 +57,7 @@ function init() {
 
       }
       postalCodeInput.disabled = false;
+      postalCodeInput.value = ""
       settlementSelector.disabled = false;
     })
 
