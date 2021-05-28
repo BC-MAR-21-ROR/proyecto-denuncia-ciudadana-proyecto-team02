@@ -8,7 +8,7 @@ def create_state_data(states, settlements)
       name: 'd_asenta'
     ).group_by { |settlement| settlement[:municipality] }
     municipalities.each do |municipality_name, settlements|
-      municipality = Municipality.find_or_create_by(
+      municipality = Municipality.create!(
         name: municipality_name,
         state: state
       )
