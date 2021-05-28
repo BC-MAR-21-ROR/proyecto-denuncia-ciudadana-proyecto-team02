@@ -69,4 +69,41 @@ RSpec.describe 'Denounce', type: :system do
       expect(page).to have_content(/successfully destroyed/)
     end
   end
+
+  describe 'Create denounce' do
+    context 'when a new denounce is created' do
+      it 'success message is shown' do
+        login(as: user)
+        visit('/denounces')
+        click_on('Add new Denounce')
+        select '2021', from: 'denounce_event_date_1i'
+        select 'May', from: 'denounce_event_date_2i'
+        select '3', from: 'denounce_event_date_3i'
+        select '23', from: 'denounce_event_date_4i'
+        select '43', from: 'denounce_event_date_5i'
+        select 'security', from: 'Area'
+        fill_in 'Title', with: 'Laudantium dicta'
+        fill_in 'Description', with: 'Laudantium dicta'
+        fill_in 'Street', with: 'Avenida Andalucia'
+        fill_in 'Number', with: '10'
+        select 'Colima', from: 'State'
+        select 'Colima', from: 'Municipality'
+        select 'Las Palmas', from: 'Settlement'
+        click_on('Save')
+        expect(page).to have_content(/successfully created/)
+      end
+    end
+    context "when a new denounce can't be created" do
+      it 'fail message is shown' do
+        login(as: user)
+        visit('/denounces')
+        click_on('Add new Denounce')
+        select 'Colima', from: 'State'
+        select 'Colima', from: 'Municipality'
+        select 'Las Palmas', from: 'Settlement'
+        click_on('Save')
+        expect(page).to have_content(/couldn't be created/)
+      end
+    end
+  end
 end
