@@ -1,3 +1,5 @@
 class HomeController < ApplicationController
-  def show; end
+  def index
+    @denounces = Denounce.all.order(created_at: :asc)
+  end
 end

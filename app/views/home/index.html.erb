@@ -1,0 +1,42 @@
+<% @denounces.each do |denounce| %>
+  <div class="card m-4 col-lg-10 mx-auto">
+    <div class="card-body">
+      <h5 class="card-title">
+        <%if denounce.anonymouse %>
+          Anonymouse
+        <%else%>
+          <%= denounce.user.username%>
+        <%end%>
+      </h5>
+      <ul class="list-group list-group-horizontal-lg my-3">
+        <li class="list-group-item col-lg-6">
+          <h6 class="card-subtitle mb-2 text-muted">Denouncement# <%= denounce.id%></h6>
+        </li>
+        <li class="list-group-item col-lg-6">
+          <h6 class="card-subtitle mb-2 text-muted float-end">Published: <%= denounce.created_at%></h6>
+        </li>
+      </ul>
+      <ul class="list-group list-group-horizontal-lg my-3">
+        <li class="list-group-item col-lg-6">
+          <h5>Details</h5>
+          <hr class="bg-primary">
+          <h6>Date & time of succession:<span class="text-muted mx-2"><%= denounce.event_date%></span></h5>
+          <h6>Area:</h6><span class="text-muted"><%= denounce.area%></span>
+          <h6>Description:</h6><span class="text-muted"></span>
+          <p class="card-text text-muted"><%= denounce.description%></p>
+        </li>
+        <li class="list-group-item col-lg-6">
+          <h5>Location</h5>
+          <hr class="bg-primary">
+          <h6>Street: <span class="text-muted mx-2"><%= denounce.address.street%></span></h6>
+          <h6>Number: <span class="text-muted mx-2"><%= denounce.address.number%></span></h6>
+          <h6>State: <span class="text-muted mx-2"><%= denounce.address.state%></span></h5>
+          <h6>Municipally: <span class="text-muted mx-2"><%= denounce.address.municipality%></span></h6>
+          <h6>Settlement: <span class="text-muted mx-2"><%= denounce.address.settlement%></span></h6>
+          <h6>Postal code: <span class="text-muted mx-2"><%= denounce.address.postal_code%></span></h6>
+        </li>
+      </ul>
+      <a href="#" class="card-link"><i class="bi bi-hand-thumbs-up"></i></a><span class="text-muted mx-3">I support it</span>
+    </div>
+  </div>
+<%end%>
