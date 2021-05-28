@@ -1,0 +1,68 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+  <a class="navbar-brand" href="#">Places Of Interest</a>
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <li class="nav-item">
+      <%= bootstrap_form_with(model: @place_of_interest, layout: :horizontal, label_col: "col-12", control_col: "col-12", inline_errors: true) do |form| %>
+        <%= form.select :settlement, @place_of_interests.all.collect {|p| p.settlement}, 
+          { include_blank: true },
+          { class: "statesSelector", required: true } %> 
+      <% end %>
+      </li>
+      <li class="nav-item">
+        <%= link_to new_place_of_interest_path, class: "btn btn-link" , title: "New" , "data-bs-toggle"=> :tooltip do %>
+          <i class="bi bi-plus-circle"></i>
+        <% end %>
+      </li> 
+      <% @place_of_interests.each do |place_of_interest| %>
+          <li class="nav-item">
+            <%= link_to place_of_interests_path, method: :delete, data: { confirm: 'Are you sure?' }, 
+            class: "btn btn-link" , title: "Delete" , "data-bs-toggle"=> :tooltip do  %>
+              <i class="bi bi-trash"></i>
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <%= link_to edit_place_of_interest_path(place_of_interest), class: "btn btn-link",
+            title: "Delete" , "data-bs-toggle"=> :tooltip do   %>
+              <i class="bi bi-pencil"></i>
+            <% end %>
+          </li>
+        </ul>
+      <% end %>
+    </div>
+  </div>
+</nav>
+
+<p id="notice"><%= notice %></p>
+
+<h1>Place Of Interests</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Postal code</th>
+      <th>Settlement</th>
+      <th>User</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @place_of_interests.each do |place_of_interest| %>
+      <tr>
+        <td><%= place_of_interest.postal_code %></td>
+        <td><%= place_of_interest.settlement %></td>
+        <td><%= place_of_interest.user_id %></td>
+        <td><%= link_to 'Show', place_of_interest %></td>
+        <td></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+<%= link_to 'New Place Of Interest', new_place_of_interest_path %>

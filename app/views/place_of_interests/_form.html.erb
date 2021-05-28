@@ -1,0 +1,21 @@
+<%= bootstrap_form_with(model: place_of_interest, layout: :horizontal, label_col: "col-sm-12", control_col: "col-sm-12", inline_errors: true) do |form| %>
+
+  <div class="field">
+    <%= form.label :postal_code %>
+    <%= form.text_field :postal_code %>
+  </div>
+
+  <div class="field">
+    <%= form.label :settlement %>
+    <%= form.text_field :settlement %>
+  </div>
+
+  <div class="field">
+    <%= form.label :user_id %>
+    <%= form.text_field :user_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
