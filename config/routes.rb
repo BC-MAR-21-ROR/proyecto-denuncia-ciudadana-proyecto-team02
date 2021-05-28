@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :place_of_interests
   devise_for :users
 
   resources :denounces
