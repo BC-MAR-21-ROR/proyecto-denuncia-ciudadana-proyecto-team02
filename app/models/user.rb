@@ -37,4 +37,5 @@ class User < ApplicationRecord
                        if: :password
   has_many :denounces
   has_many :place_of_interest
+  has_many :likes, dependent: :destroy
 end

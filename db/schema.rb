@@ -39,14 +39,14 @@ ActiveRecord::Schema.define(version: 2021_05_28_182701) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-<<<<<<< HEAD
   create_table "place_of_interests", force: :cascade do |t|
     t.bigint "postal_code", null: false
     t.string "settlement", limit: 50, null: false
     t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-=======
+  end
+
   create_table "likes", force: :cascade do |t|
     t.string "likeable_type", null: false
     t.bigint "likeable_id", null: false
@@ -55,7 +55,6 @@ ActiveRecord::Schema.define(version: 2021_05_28_182701) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["likeable_type", "likeable_id"], name: "index_likes_on_likeable"
     t.index ["user_id"], name: "index_likes_on_user_id"
->>>>>>> cd34299 (Add model to track user likes)
   end
 
   create_table "users", force: :cascade do |t|

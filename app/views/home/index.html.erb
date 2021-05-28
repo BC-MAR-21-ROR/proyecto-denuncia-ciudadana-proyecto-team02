@@ -36,7 +36,18 @@
           <h6>Postal code: <span class="text-muted mx-2"><%= denounce.address.postal_code%></span></h6>
         </li>
       </ul>
-      <a href="#" class="card-link"><i class="bi bi-hand-thumbs-up"></i></a><span class="text-muted mx-3">I support it</span>
+      <%if current_user.likes.find_by(likeable_id: denounce.id).nil? %>
+        <%=link_to likes_path(likeable_id: denounce.id, likeable_type: denounce.class.name),
+          method: :post , class: 'btn btn-link' ,title: "like" , "data-bs-toggle"=> :tooltip do %>
+          <i class="bi bi-hand-thumbs-up"></i>
+        <%end%>
+      <%else%>
+        <%=link_to like_path(current_user.likes.find_by(likeable_id: denounce.id), likeable_id: denounce.id, likeable_type: denounce.class.name),
+          method: :delete , class: 'btn btn-link' ,title: "unlike" , "data-bs-toggle"=> :tooltip do %>
+          <i class="bi bi-hand-thumbs-up-fill"></i>
+        <%end%>
+      <%end%>
+        <span class="text-muted"><%=denounce.likes.count%></span>
     </div>
   </div>
 <%end%>
