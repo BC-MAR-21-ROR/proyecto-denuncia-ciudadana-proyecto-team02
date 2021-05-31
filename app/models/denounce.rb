@@ -19,4 +19,6 @@ class Denounce < ApplicationRecord
   has_one :address, dependent: :destroy
   accepts_nested_attributes_for :address, allow_destroy: true
   has_many :likes, as: :likeable, dependent: :destroy
+
+  scope :for_postal_code, ->(postal_codes) { joins(:address).where(address: { postal_code: postal_codes }) }
 end
