@@ -38,4 +38,8 @@ class User < ApplicationRecord
   has_many :denounces
   has_many :place_of_interest
   has_many :likes, dependent: :destroy
+
+  def like?(likeable)
+    likes.find_by(likeable_id: likeable.id, likeable_type: likeable.class.name)
+  end
 end

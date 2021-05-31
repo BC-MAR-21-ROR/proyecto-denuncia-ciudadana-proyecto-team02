@@ -2,11 +2,7 @@
   <div class="card m-4 col-lg-10 mx-auto">
     <div class="card-body">
       <h5 class="card-title">
-        <%if denounce.anonymouse %>
-          Anonymouse
-        <%else%>
-          <%= denounce.user.username%>
-        <%end%>
+        <%= denounce.anonymouse? ? 'Anonymouse' : denounce.user.username %>
       </h5>
       <ul class="list-group list-group-horizontal-lg my-3">
         <li class="list-group-item col-lg-6">
@@ -36,18 +32,8 @@
           <h6>Postal code: <span class="text-muted mx-2"><%= denounce.address.postal_code%></span></h6>
         </li>
       </ul>
-      <%if current_user.likes.find_by(likeable_id: denounce.id).nil? %>
-        <%=link_to likes_path(likeable_id: denounce.id, likeable_type: denounce.class.name),
-          method: :post , class: 'btn btn-link' ,title: "like" , "data-bs-toggle"=> :tooltip do %>
-          <i class="bi bi-hand-thumbs-up"></i>
-        <%end%>
-      <%else%>
-        <%=link_to like_path(current_user.likes.find_by(likeable_id: denounce.id), likeable_id: denounce.id, likeable_type: denounce.class.name),
-          method: :delete , class: 'btn btn-link' ,title: "unlike" , "data-bs-toggle"=> :tooltip do %>
-          <i class="bi bi-hand-thumbs-up-fill"></i>
-        <%end%>
-      <%end%>
-        <span class="text-muted"><%=denounce.likes.count%></span>
+      <%= current_user.nil? || current_user.like?(denounce).nil? ? like_link_for(denounce) : unlike_link_for(denounce) %>
+      <span class="text-muted"><%=denounce.likes.count%></span>
     </div>
   </div>
 <%end%>
