@@ -18,7 +18,6 @@ FactoryBot.define do
     title { Faker::Lorem.sentence(word_count: 3) }
     area { Faker::Number.between(from: 0, to: 6) }
     description { Faker::Lorem.paragraph }
-    # address_id {1}
     anonymouse { [true, false].sample }
     user
     address { association :address, denounce: instance }
