@@ -1,9 +1,11 @@
 <% @denounces.each do |denounce| %>
   <div class="card m-4 col-lg-10 mx-auto">
-    <div class="card-body">
+    <div class="card-header bg-transparent" id="denounce_<%=denounce.id%>">
       <h5 class="card-title">
         <%= denounce.anonymouse? ? 'Anonymouse' : denounce.user.username %>
       </h5>
+    </div>
+    <div class="card-body">
       <ul class="list-group list-group-horizontal-lg my-3">
         <li class="list-group-item col-lg-6">
           <h6 class="card-subtitle mb-2 text-muted">Denouncement# <%= denounce.id%></h6>

@@ -8,7 +8,7 @@ class LikesController < ApplicationController
     else
       flash[:alert] = @like.errors.full_messages.join(', ')
     end
-    redirect_to root_path
+    redirect_to root_path(anchor: "denounce_#{@like.likeable_id}")
   end
 
   def destroy
@@ -18,7 +18,7 @@ class LikesController < ApplicationController
     else
       flash[:alert] = @like.errors.full_messages.join(', ')
     end
-    redirect_to root_path
+    redirect_to root_path(anchor: "denounce_#{@like.likeable_id}")
   end
 
   protected
