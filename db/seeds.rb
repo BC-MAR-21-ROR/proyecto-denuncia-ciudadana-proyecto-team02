@@ -9,7 +9,24 @@
 
 # WE WANT DENOUNCES A
 p "Generating main user test...!"
-user = FactoryBot.create(:user, username: 'test', email: 'test@gmail.com', password: 'test1234', password_confirmation: 'test1234')
+user = FactoryBot.create(
+  :user, 
+  username: 'test', 
+  email: 'test@gmail.com', 
+  password: 'test1234', 
+  password_confirmation: 'test1234'
+)
 
 p "Generating randoms denounces...!"
 denounces = FactoryBot.create_list(:denounce, 10, user: user)
+
+p "Generating randoms places of interest for #{user.username}...!"
+denounces.each do |denounce|
+  current_address = denounce.address
+  FactoryBot.create(
+    :place_of_interest,
+    user: user,
+    settlement: current_address.settlement,
+    postal_code: current_address.postal_code
+  )
+end
