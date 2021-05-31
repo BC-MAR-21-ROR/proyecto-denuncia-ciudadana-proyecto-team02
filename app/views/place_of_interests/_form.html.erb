@@ -1,21 +1,28 @@
 <%= bootstrap_form_with(model: place_of_interest, layout: :horizontal, label_col: "col-sm-12", control_col: "col-sm-12", inline_errors: true) do |form| %>
+  <div class="card">
+    <div class="card-body">
+      <div class="field" id="search-data" data-settlements="<%= Settlement.distinct.pluck(:name).sort %>">
+        <%= form.search_field :settlement , id: "autoComplete"%>
+      </div>
 
-  <div class="field">
-    <%= form.label :postal_code %>
-    <%= form.text_field :postal_code %>
+      <div class="field">
+        <%= form.text_field :postal_code, placeholder: "ex: 28899"%>
+      </div>
+
+    </div>
+    <div class="card-footer">
+      <div class="row justify-content-start">
+        <div class="col-4">
+          <%= link_to 'Back', place_of_interests_path,  class: "btn btn-dark" %>
+        </div>
+        <div class="col-6">
+          <div class="actions container">
+            <%= form.submit "Save", class: "btn btn-primary btn-lg btn-block", role:"button"%>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :settlement %>
-    <%= form.text_field :settlement %>
-  </div>
-
-  <div class="field">
-    <%= form.label :user_id %>
-    <%= form.text_field :user_id %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
 <% end %>
+<%= javascript_pack_tag 'poiAutocomplete.js' %>
