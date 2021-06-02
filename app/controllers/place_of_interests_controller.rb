@@ -23,16 +23,12 @@ class PlaceOfInterestsController < ApplicationController
 
   # POST /place_of_interests or /place_of_interests.json
   def create
-    @place_of_interest = PlaceOfInterest.new(place_of_interest_params)
-
-    respond_to do |format|
-      if @place_of_interest.save
-        format.html { redirect_to @place_of_interest, notice: "Place of interest was successfully created." }
-        format.json { render :show, status: :created, location: @place_of_interest }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @place_of_interest.errors, status: :unprocessable_entity }
-      end
+    @place_of_interest = current_user.place_of_interest.build(place_of_interest_params)
+    if @place_of_interest.save
+      redirect_to place_of_interests_path, flash: { notice: 'Place of interest was successfully created.' }
+    else
+      flash[:error] = "Sorry , place of interest can not be created."
+      render :new
     end
   end
 
