@@ -1,12 +1,12 @@
 <%= bootstrap_form_with(model: place_of_interest, layout: :horizontal, label_col: "col-sm-12", control_col: "col-sm-12", inline_errors: true) do |form| %>
   <div class="card">
     <div class="card-body">
-      <div class="field" id="search-data" data-settlements="<%= Settlement.distinct.pluck(:name).sort %>">
-        <%= form.search_field :settlement , id: "autoComplete"%>
+      <div class="field">
+        <%= form.text_field :postal_code, id: "postalCode", placeholder: "ex: 28899", pattern:"[0-9]{5}" %>
       </div>
 
       <div class="field">
-        <%= form.text_field :postal_code, placeholder: "ex: 28899"%>
+        <%= form.search_field :settlement , id: "autoComplete", autocomplete: "off" %>
       </div>
 
     </div>
@@ -17,7 +17,7 @@
         </div>
         <div class="col-6">
           <div class="actions container">
-            <%= form.submit "Save", class: "btn btn-primary btn-lg btn-block", role:"button"%>
+            <%= form.submit "Save", class: "btn btn-primary btn-lg btn-block" %>
           </div>
         </div>
       </div>
