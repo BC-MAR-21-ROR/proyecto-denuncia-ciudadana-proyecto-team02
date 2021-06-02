@@ -7,4 +7,8 @@ class SettlementsController < ApiController
   def show
     render json: Settlement.where(postal_code: params[:postal_code]).distinct
   end
+
+  def show
+    render json: Settlement.where(postal_code: params[:postal_code]).distinct
+  end
 end
