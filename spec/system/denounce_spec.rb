@@ -8,6 +8,11 @@ RSpec.describe 'Denounce', type: :system do
   let :user do
     FactoryBot.create(:user)
   end
+
+  let :denounce do
+    FactoryBot.create(:denounce, title: 'Laudantium dicta illo', user: user)
+  end
+
   describe 'accessing my denounces' do
     context 'when user is not signed in' do
       it 'redirects to sign in' do
@@ -28,7 +33,7 @@ RSpec.describe 'Denounce', type: :system do
 
   describe 'Show denounce' do
     it 'displays denounce details' do
-      FactoryBot.create(:denounce, title: 'Laudantium dicta illo', user: user)
+      denounce
       login(as: user)
       visit('/denounces')
       find('#accordionDenounces .accordion-item .bi.bi-eye').click
@@ -37,10 +42,12 @@ RSpec.describe 'Denounce', type: :system do
   end
 
   describe 'Edit denounce' do
-    it 'successfully update title of denounce' do
-      FactoryBot.create(:denounce, title: 'Laudantium dicta illo', user: user)
+    before do
+      denounce
       login(as: user)
       visit('/denounces')
+    end
+    it 'successfully update title of denounce' do
       find('#accordionDenounces .accordion-item .bi.bi-pencil').click
       expect(page).to have_content(/Event date/)
       fill_in 'denounce_title', with: 'x Laudantium dicta'
@@ -48,12 +55,9 @@ RSpec.describe 'Denounce', type: :system do
       expect(page).to have_content(/successfully updated/)
     end
     it 'fail update title of denounce' do
-      FactoryBot.create(:denounce, title: 'Laudantium dicta illo', user: user)
-      login(as: user)
-      visit('/denounces')
       find('#accordionDenounces .accordion-item .bi.bi-pencil').click
       expect(page).to have_content(/Event date/)
-      fill_in 'denounce_title', with: ''
+      fill_in 'denounce_title', with: nil
       click_on 'Save'
       expect(page).to have_content(/couldn't be updated/)
     end
@@ -61,7 +65,7 @@ RSpec.describe 'Denounce', type: :system do
 
   describe 'Destroy denounce' do
     it 'clicking trash icon of a denounce must destroy it' do
-      FactoryBot.create(:denounce, title: 'Laudantium dicta illo', user: user)
+      denounce
       login(as: user)
       visit('/denounces')
       find('#accordionDenounces .accordion-item .bi.bi-trash').click
