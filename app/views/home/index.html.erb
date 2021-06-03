@@ -32,11 +32,10 @@
           <h6>Municipally: <span class="text-muted mx-2"><%= denounce.address.municipality%></span></h6>
           <h6>Settlement: <span class="text-muted mx-2"><%= denounce.address.settlement%></span></h6>
           <h6>Postal code: <span class="text-muted mx-2"><%= denounce.address.postal_code%></span></h6>
-        </li>
-      </ul>
-      <%= current_user.nil? || current_user.like?(denounce).nil? ? like_link_for(denounce) : unlike_link_for(denounce) %>
-      <span class="text-muted"><%=denounce.likes.count%></span>
-    </div>
+      </li>
+    </ul>
+    <%= likeable?(denounce) ? like_link_for(denounce) : unlike_link_for(denounce) %>
+    <span class="text-muted" id="denounce-count-<%=denounce.id%>"><%=denounce.likes.count%></span>
   </div>
 </div>
 <%end%>
