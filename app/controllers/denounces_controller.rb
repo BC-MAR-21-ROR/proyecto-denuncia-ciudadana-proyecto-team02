@@ -1,5 +1,6 @@
 class DenouncesController < ApplicationController
   before_action :set_denounce, only: %i[show edit update destroy]
+  before_action :set_states, only: %i[new edit create update]
   before_action :authenticate_user!
 
   # GET /denounces
@@ -13,11 +14,13 @@ class DenouncesController < ApplicationController
   # GET /denounces/new
   def new
     @denounce = Denounce.new
-    @states = State.all
+    @address = Address.new
   end
 
   # GET /denounces/1/edit
-  def edit; end
+  def edit
+    @address = @denounce.address
+  end
 
   # POST /denounces
   def create
@@ -57,7 +60,6 @@ class DenouncesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def denounce_params
-    # TODO: ACEPT ADDRESS PARAMETERS
     params.require(:denounce).permit(
       :event_date,
       :area,
@@ -66,5 +68,9 @@ class DenouncesController < ApplicationController
       :anonymouse,
       address_attributes: [:id, :state, :municipality, :settlement, :postal_code]
     )
+  end
+
+  def set_states
+    @states = State.all.order(name: :asc).pluck(:name)
   end
 end
