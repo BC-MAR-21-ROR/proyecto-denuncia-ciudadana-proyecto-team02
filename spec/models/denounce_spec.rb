@@ -17,36 +17,13 @@ require 'rails_helper'
 RSpec.describe Denounce, type: :model do
   describe 'associations' do
     it { should belong_to(:user) }
+    it { should have_one(:address).dependent(:destroy) }
+    it { should accept_nested_attributes_for(:address).allow_destroy(true) }
   end
 
   describe 'validations' do
-    subject { build(:denounce) }
-
     it { should validate_presence_of(:area) }
     it { should validate_presence_of(:title) }
     it { should validate_presence_of(:description) }
-    # it { should validate_presence_of(:anonymouse) }
-
-    context 'Invalid presence' do
-      it 'is not valid without a title' do
-        subject.title = nil
-        expect(subject).to_not be_valid
-      end
-
-      it 'is not valid without an area' do
-        subject.area = nil
-        expect(subject).to_not be_valid
-      end
-
-      it 'is not valid without a description' do
-        subject.description = nil
-        expect(subject).to_not be_valid
-      end
-
-      # xit 'is not valid without a anonymouse option' do
-      #   subject.anonymouse = nil
-      #   expect(subject).to_not be_valid
-      # end
-    end
   end
 end
