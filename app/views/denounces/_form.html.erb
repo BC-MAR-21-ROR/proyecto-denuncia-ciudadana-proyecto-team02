@@ -21,14 +21,14 @@
       <div class="row">
         <div class="col-lg-5">
           <%= form_field.select :state,
-                    @states,
+                    options_for_state_select,
                     { include_blank: true },
                     { class: "statesSelector", required: true }
                   %>
         </div>
         <div class="col-lg-5">
           <%= form_field.select :municipality,
-                    (@denounce.address) ? State.find_by(name: @denounce.address.state).municipalities.pluck(:name) : [],
+                    options_for_municipality_select(@denounce.address),
                     id: :municipality,
                     required:true
                   %>
@@ -36,7 +36,7 @@
       </div>
       <div class="row">
         <div class="col-lg-5">
-          <%= form_field.select :settlement, (@denounce.address) ? Municipality.find_by(name: @denounce.address.municipality).settlements.pluck(:name) : [] , { required: true } %>
+          <%= form_field.select :settlement, options_for_settlement_select(@denounce.address), { required: true } %>
         </div>
         <div class="col-lg-5">
           <%= form_field.text_field :postal_code, label: "Postal Code",  id: "postalCodeInput"%>

@@ -1,11 +1,10 @@
 class DenouncesController < ApplicationController
   before_action :set_denounce, only: %i[show edit update destroy]
-  before_action :set_states, only: %i[new edit create update]
   before_action :authenticate_user!
 
   # GET /denounces
   def index
-    @denounces = current_user.denounces.order(created_at: :asc)
+    @denounces = current_user.denounces.order(created_at: :desc)
   end
 
   # GET /denounces/1
@@ -68,9 +67,5 @@ class DenouncesController < ApplicationController
       :anonymouse,
       address_attributes: [:id, :state, :municipality, :settlement, :postal_code]
     )
-  end
-
-  def set_states
-    @states = State.all.order(name: :asc).pluck(:name)
   end
 end

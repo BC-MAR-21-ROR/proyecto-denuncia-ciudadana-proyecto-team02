@@ -10,4 +10,8 @@
 class State < ApplicationRecordAws
   has_many :municipalities
   has_many :settlements, through: :municipalities
+
+  def self.names
+    order(name: :asc).pluck(:name)
+  end
 end
