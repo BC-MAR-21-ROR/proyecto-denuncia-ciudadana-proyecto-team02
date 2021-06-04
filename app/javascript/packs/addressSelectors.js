@@ -1,75 +1,82 @@
-function init() {
-  const statesSelector = document.querySelector("#denounce_address_attributes_state");
-  const municipalitySelector = document.querySelector("#denounce_address_attributes_municipality");
-  const settlementSelector = document.querySelector("#denounce_address_attributes_settlement");
-  const postalCodeInput = document.querySelector("#postalCodeInput");
+class SelectAddress {
+  currentSelectors = [];
+  inputsIds = [
+    "denounce_address_attributes_state",
+    "denounce_address_attributes_municipality",
+    "denounce_address_attributes_settlement",
+    "postalCodeInput",
+  ];
+  currentSettlements = [];
 
-  console.info("Municipality Selector", municipalitySelector)
-  let toggle = false;
-  if (!municipalitySelector.value) toggle = true
-  municipalitySelector.disabled = toggle;
-  settlementSelector.disabled = toggle;
-  postalCodeInput.disabled = toggle;
+  constructor() {
+    this.build();
+  }
 
-    // caching
-    let currentSettlements = [];
+  build() {
+    for (const inputId of this.inputsIds) {
+      const generatedInput = document.querySelector(`#${inputId}`);
+      this.currentSelectors.push(generatedInput);
+    }
+    console.info("Done generating selectors, all good");
+    if (!this.currentSelectors[1].value) this.resetDataAndDisables(0, true)
+  }
 
-    statesSelector.addEventListener('change', async function (event) {
-      let value = event.target.value || statesSelector.nodeValue
-      municipalitySelector.innerHTML = ""
-      const municipalities = await newRequest(`/api/municipalities?state=${value}`)
-      console.info("Selected municipallies:", municipalities);
-      let optionIncludeBlank = document.createElement("option");
-      municipalitySelector.add(optionIncludeBlank);
-      for (const municipality of municipalities) {
-        const option = document.createElement("option");
+  start() {
+    if (this.currentSelectors.length > 0) {
+      for (const [index, selector] of this.currentSelectors.entries()) {
+        if (index >= 3) continue; //we dont need a event on postalCode
+        selector.addEventListener("change", (event) => {
+          const value = event.target.value || selector.value;
+          if (index === 2) {
+            const filteredSettlement = this.currentSettlements.find(settlementCache => settlementCache.name === value);
+            this.currentSelectors[3].value = filteredSettlement.postal_code //simulate function to change postal code
+          } else {
+            const url =
+              index === 0 //si el es selector de states/
+                ? `/api/municipalities?state=${value}`
+                : `/api/settlements?municipality=${value}`;
+            this.selectorControllerRequest(url, index);
+          }
 
-        option.text = municipality.name;
-        municipalitySelector.add(option)
+          this.resetDataAndDisables(index);
+        });
       }
+      console.info("Applied Events with success!");
+    } else {
+      throw new Error("We need valid selectors id's to start.");
+    }
+  }
 
-      //disable to reset data
-      settlementSelector.value = "Choose one"
-      postalCodeInput.value = ""
-      settlementSelector.disabled = true
-      postalCodeInput.disabled = true;
-      municipalitySelector.disabled = false
-    })
-
-    municipalitySelector.addEventListener('change', async function (event) {
-      // debugger
-
-      let value = event.target.value || municipalitySelector.nodeValue
-      settlementSelector.innerHTML = ""
-      const settlements = await newRequest(`/api/settlements?municipality=${value}`)
-      console.info("Selected settlements:", settlements);
-
-      currentSettlements = [];
-      let optionIncludeBlank = document.createElement("option");
-      settlementSelector.add(optionIncludeBlank);
-
-      for (const settlement of settlements) {
-        const option = document.createElement("option");
-        // option.name = settlement.name;
-        option.text = settlement.name;
-        settlementSelector.add(option);
-        currentSettlements.push(settlement);
-
+  resetDataAndDisables(selectedIndex, isInitialSetup = false) {
+    let currentIndexToInspect = this.currentSelectors.length - 1
+    while (currentIndexToInspect >= 0) {
+      if (selectedIndex === currentIndexToInspect || (currentIndexToInspect === selectedIndex + 1 && !isInitialSetup)) {
+        this.currentSelectors[currentIndexToInspect].disabled = false 
+        return
       }
-      postalCodeInput.disabled = false;
-      postalCodeInput.value = ""
-      settlementSelector.disabled = false;
-    })
+      this.currentSelectors[currentIndexToInspect].value = "";
+      this.currentSelectors[currentIndexToInspect].disabled = true
+      currentIndexToInspect--;
+    }
+  }
 
-    settlementSelector.addEventListener('change', function (event) {
-      let value = event.target.value || settlementSelector.nodeValue
-      const filteredSettlement = currentSettlements.find(settlementCache => settlementCache.name === value);
+  async selectorControllerRequest(url, selectPostion) {
+    this.currentSelectors[selectPostion + 1].innerHTML = "";
+    const dataFromApi = await newRequest(url);
 
-      postalCodeInput.value = filteredSettlement.postal_code
-      postalCodeInput.disabled = false;
-    })
+    let optionIncludeBlank = document.createElement("option");
+    this.currentSelectors[selectPostion + 1].add(optionIncludeBlank);
+
+     if (selectPostion === 1) this.currentSettlements = []
+    for (const data of dataFromApi) {
+      const option = document.createElement("option");
+
+      option.text = data.name;
+      this.currentSelectors[selectPostion + 1].add(option);
+      if (selectPostion === 1) this.currentSettlements.push(data);
+    }
+  }
 }
-
 // Fetch Helper
 function newRequest(URL){
   //New Promise recibe una funcion
@@ -90,5 +97,11 @@ function newRequest(URL){
 }
 
 window.onload = function () {
-    init()
+  try {
+    const script = new SelectAddress()
+    script.start()
+  }
+  catch( e ) {
+    console.error("Error loading script...", e)
+  }
 }
