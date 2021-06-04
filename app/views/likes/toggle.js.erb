@@ -1,7 +1,7 @@
 
 function toggleLike() {
   let likeId = '<%= @like.likeable_id %>'
-  let elementCountLike = document.querySelector(`#denounce-count-${likeId}`);
+  let elementCountLike = document.querySelector(`#count-${likeId}`);
   elementCountLike.previousElementSibling.remove()
   let link = '<%= likeable?(@like.likeable) ? like_link_for(@like.likeable) : unlike_link_for(@like.likeable)%>'
   elementCountLike.insertAdjacentHTML("beforebegin", link)

@@ -11,7 +11,7 @@
         <h6 class="card-subtitle mb-2 text-muted">Denouncement# <%= denounce.id%></h6>
       </li>
       <li class="list-group-item col-lg-6">
-        <h6 class="card-subtitle mb-2 text-muted float-end">Published: <%= denounce.created_at%></h6>
+        <h6 class="card-subtitle mb-2 text-muted float-end-lg">Published: <%= denounce.created_at%></h6>
       </li>
     </ul>
     <ul class="list-group list-group-horizontal-lg">
@@ -35,7 +35,7 @@
       </li>
     </ul>
     <%= likeable?(denounce) ? like_link_for(denounce) : unlike_link_for(denounce) %>
-    <span class="text-muted" id="denounce-count-<%=denounce.id%>"><%=denounce.likes.count%></span>
+    <span class="text-muted" id="count-<%=denounce.id%>"><%=denounce.likes.count%></span>
   </div>
 </div>
 <%end%>
