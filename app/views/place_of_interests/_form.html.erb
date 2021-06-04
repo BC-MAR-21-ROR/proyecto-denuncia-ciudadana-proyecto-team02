@@ -1,14 +1,13 @@
 <%= bootstrap_form_with(model: place_of_interest, layout: :horizontal, label_col: "col-sm-12", control_col: "col-sm-12", inline_errors: true) do |form| %>
   <div class="card">
     <div class="card-body">
-      <div class="field">
-        <%= form.text_field :postal_code, id: "postalCode", placeholder: "ex: 28899", pattern:"[0-9]{5}", class: "autocomplete" %>
+      <div class="field autocomplete">
+        <%= form.text_field :postal_code, id: "postalCode", placeholder: "ex: 28899", pattern:"[0-9]{5}" %>
       </div>
 
-      <div class="field">
+      <div class="field autocomplete">
         <%= form.search_field :settlement , id: "autoComplete", autocomplete: "off" %>
       </div>
-
     </div>
     <div class="card-footer">
       <div class="row justify-content-start">
