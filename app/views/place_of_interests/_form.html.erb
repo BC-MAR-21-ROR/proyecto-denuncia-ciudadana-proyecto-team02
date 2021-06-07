@@ -1,22 +1,22 @@
 <%= bootstrap_form_with(model: place_of_interest, layout: :horizontal, label_col: "col-sm-12", control_col: "col-sm-12", inline_errors: true) do |form| %>
   <div class="card">
-    <div class="card-body">
-      <div class="field autocomplete">
+    <div class="card-body d-flex justify-content-around">
+      <div class="field autocomplete position-relative">
         <%= form.text_field :postal_code, id: "postalCode", placeholder: "ex: 28899", pattern:"[0-9]{5}" %>
       </div>
-
-      <div class="field autocomplete">
+      <div class="field autocomplete position-relative">
         <%= form.search_field :settlement , id: "autoComplete", autocomplete: "off" %>
       </div>
+   </div>
     </div>
     <div class="card-footer">
-      <div class="row justify-content-start">
-        <div class="col-4">
+      <div class="row ">
+        <div class="col-6">
           <%= link_to 'Back', place_of_interests_path,  class: "btn btn-dark" %>
         </div>
-        <div class="col-6">
-          <div class="actions container">
-            <%= form.submit "Save", class: "btn btn-primary btn-lg btn-block" %>
+        <div class="col-6 d-flex justify-content-end">
+          <div class="actions">
+            <%= form.submit "Save", class: "btn btn-primary btn-block" %>
           </div>
         </div>
       </div>
