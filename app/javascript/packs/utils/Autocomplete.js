@@ -12,7 +12,7 @@ function autocomplete(inp, arr) {
       /*create a DIV element that will contain the items (values):*/
       a = document.createElement("DIV");
       a.setAttribute("id", this.id + "autocomplete-list");
-      a.setAttribute("class", "autocomplete-items");
+      a.setAttribute("class", "autocomplete-items mt-0");
       /*append the DIV element as a child of the autocomplete container:*/
       this.parentNode.appendChild(a);
       /*for each item in the array...*/
@@ -50,7 +50,8 @@ function autocomplete(inp, arr) {
         addActive(x);
       } else if (e.keyCode == 38) { //up
         /*If the arrow UP key is pressed,
-        decrease the currentFocus variable:*/
+   
+       decrease the currentFocus variable:*/
         currentFocus--;
         /*and and make the current item more visible:*/
         addActive(x);
@@ -89,7 +90,7 @@ function autocomplete(inp, arr) {
     }
   }
   }
-    
+
     /*execute a function when someone clicks in the document:*/
     document.addEventListener("click", function (e) {
         closeAllLists(e.target);
