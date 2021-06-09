@@ -1,10 +1,6 @@
 class HomeController < ApplicationController
   def index
-<<<<<<< HEAD
     @pagy, @denounces = pagy(filtered_denounces.order(created_at: :desc), items: 4)
-=======
-    @denounces = filtered_denounces.order(created_at: :desc)
->>>>>>> Fix:
   end
 
   private
