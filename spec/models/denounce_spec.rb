@@ -25,5 +25,7 @@ RSpec.describe Denounce, type: :model do
     it { should validate_presence_of(:area) }
     it { should validate_presence_of(:title) }
     it { should validate_presence_of(:description) }
+    it { should validate_content_type_of(:medias).allowing( %i[jpg png jpeg pdf] ) }
+    it { should validate_size_of(:medias).less_than(10.megabytes) }
   end
 end
