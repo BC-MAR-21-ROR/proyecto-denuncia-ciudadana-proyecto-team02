@@ -8,7 +8,7 @@ module LikesHelper
       method: :post,
       id: "create-like-#{likeable.id}",
       class: 'btn btn-link my-2',
-      remote: true
+      remote: current_user.present? ? true : false
     }
     link_to likes_path(likeable_id: likeable.id, likeable_type: likeable.class.name), options do
       content_tag(:i, nil, class: 'bi bi-hand-thumbs-up')
@@ -20,7 +20,7 @@ module LikesHelper
       method: :delete,
       id: "destroy-like-#{likeable.id}",
       class: 'btn btn-link my-2',
-      remote: true
+      remote: current_user.present? ? true : false
     }
     link_to like_path(current_user.like?(likeable)), options do
       content_tag(:i, nil, class: 'bi bi-hand-thumbs-up-fill')

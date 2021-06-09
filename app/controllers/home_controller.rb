@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
   def index
-    @denounces = filtered_denounces.order(created_at: :asc)
+    @denounces = filtered_denounces.order(created_at: :desc)
   end
 
   private

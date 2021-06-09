@@ -21,4 +21,14 @@ RSpec.describe 'Likes', type: :system do
       expect(page).to have_selector("#create-like-#{denounce.id}")
     end
   end
+
+  context 'when the user is not logged' do
+    it "can't like denounces" do
+      denounce = FactoryBot.create(:denounce)
+      visit('/')
+      click_link("create-like-#{denounce.id}")
+
+      expect(page).to have_content(/You need to sign in/)
+    end
+  end
 end
