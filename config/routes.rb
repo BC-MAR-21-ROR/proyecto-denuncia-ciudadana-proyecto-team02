@@ -1,9 +1,12 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   resources :place_of_interests
   devise_for :users
 
   resources :denounces
   resources :likes, only: %i[create destroy]
+  resources :evidences, only: :destroy
 
   scope :api do
     get 'municipalities', to: 'municipalities#index'

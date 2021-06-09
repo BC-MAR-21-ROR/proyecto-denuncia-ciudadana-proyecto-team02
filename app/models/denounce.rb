@@ -15,8 +15,12 @@
 class Denounce < ApplicationRecord
   enum area: %i[security services infrastructure theft bribery abuse transit]
   validates :area, :title, :description, presence: true
+  validates :medias, content_type: %i[png jpg jpeg pdf]
+  validates :medias, size: { less_than: 10.megabytes , message: 'is not given between size' }
+  validates :medias, limit: { min: 1, max: 3 }
   belongs_to :user
   has_one :address, dependent: :destroy
+  has_many_attached :medias, dependent: :destroy
   accepts_nested_attributes_for :address, allow_destroy: true
   has_many :likes, as: :likeable, dependent: :destroy
 

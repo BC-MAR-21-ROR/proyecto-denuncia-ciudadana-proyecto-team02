@@ -27,6 +27,9 @@
 
             <dt class="col-6"><strong>Anonymous:</strong></dt>
             <dd class="col-6"><%= @denounce.anonymouse %></dd>
+            <% @denounce.medias.each do |media| %>
+              <%= image_tag url_for(media), class: 'img-fluid img-thumbnail' %>
+            <% end %>
             <% if @denounce.address %>
               <h4>Address</h4>
               <dt class="col-6"><strong>State</strong></dt>

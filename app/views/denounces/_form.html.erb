@@ -3,7 +3,7 @@
 <div class="card-body mx-4 my-4">
   <div class="row">
     <div class="col-12 col-lg-6">
-      <h3>Denounce Information</h3>x
+      <h3>Denounce Information</h3>
       <%= form.datetime_select :event_date %>
       <%= form.select :area, Denounce.areas.keys %>
       <%= form.text_field :title %>
@@ -40,6 +40,15 @@
         </div>
         <div class="col-lg-5">
           <%= form_field.text_field :postal_code, label: "Postal Code",  id: "postalCodeInput"%>
+        </div>
+        <div class="col-lg-10">
+          <div class="field">
+            <%= form.file_field :medias, { multiple: true, id: "myfiles" } %>
+            <% @denounce.medias.each do |media| %>
+              <%= image_tag url_for(media), class: 'img-fluid img-thumbnail' %>
+              <%= link_to 'x', evidence_url(media_id: media), method: :delete, data: { confirm: 'Are you sure' }, class: 'remove-media' %>
+            <% end %>
+          </div>
         </div>
       </div>
       <% end %>

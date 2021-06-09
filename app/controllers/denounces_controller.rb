@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class DenouncesController < ApplicationController
   before_action :set_denounce, only: %i[show edit update destroy]
   before_action :authenticate_user!
@@ -65,7 +67,8 @@ class DenouncesController < ApplicationController
       :title,
       :description,
       :anonymouse,
-      address_attributes: [:id, :state, :municipality, :settlement, :postal_code]
+      address_attributes: %i[id state municipality settlement postal_code street number],
+      medias: []
     )
   end
 end
