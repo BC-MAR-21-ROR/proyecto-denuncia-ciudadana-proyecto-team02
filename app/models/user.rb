@@ -36,4 +36,5 @@ class User < ApplicationRecord
                        presence: true,
                        if: :password
   has_many :denounces
+  has_many :place_of_interest
 end

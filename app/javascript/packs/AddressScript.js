@@ -18,7 +18,6 @@ class SelectAddress {
       this.currentSelectors.push(generatedInput);
     }
     console.info("Done generating selectors, all good");
-    if (!this.currentSelectors[1].value) this.resetDataAndDisables(0, true)
   }
 
   start() {
@@ -41,21 +40,20 @@ class SelectAddress {
           this.resetDataAndDisables(index);
         });
       }
-      console.info("Applied Events with success!");
     } else {
       throw new Error("We need valid selectors id's to start.");
     }
   }
 
-  resetDataAndDisables(selectedIndex, isInitialSetup = false) {
+  resetDataAndDisables(selectedIndex, toDisable = true) {
     let currentIndexToInspect = this.currentSelectors.length - 1
     while (currentIndexToInspect >= 0) {
-      if (selectedIndex === currentIndexToInspect || (currentIndexToInspect === selectedIndex + 1 && !isInitialSetup)) {
-        this.currentSelectors[currentIndexToInspecast].disabled = false 
+      if (selectedIndex === currentIndexToInspect || currentIndexToInspect === selectedIndex + 1) {
+        this.currentSelectors[currentIndexToInspect].disabled = !toDisable
         return
       }
       this.currentSelectors[currentIndexToInspect].value = "";
-      this.currentSelectors[currentIndexToInspect].disabled = true
+      this.currentSelectors[currentIndexToInspect].disabled = toDisable
       currentIndexToInspect--;
     }
   }
@@ -77,6 +75,9 @@ class SelectAddress {
     }
   }
 }
+
+export default SelectAddress
+
 // Fetch Helper
 function newRequest(URL){
   //New Promise recibe una funcion
@@ -94,13 +95,4 @@ function newRequest(URL){
     req.open('GET', URL);
     req.send(null);
   })
-}
-window.onload = function () {
-  try {
-    const script = new SelectAddress()
-    script.start()
-  }
-  catch( e ) {
-    console.error("Error loading script...", e)
-  }
 }

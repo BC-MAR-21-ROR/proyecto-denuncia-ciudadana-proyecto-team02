@@ -22,13 +22,19 @@
           <ul class="dropdown-menu mt-md-5" aria-labelledby="navbarDropdownMenuLink">
             <li>
               <%= link_to edit_user_registration_path, class: "dropdown-item d-flex align-items-center" do %>
-                <i class="bi bi-gear mx-4"></i> Profile settings 
+                <i class="bi bi-gear mx-4"></i> Profile Settings 
+              <% end %>
+            </li>
+            <li><hr class="dropdown-divider"></li>
+            <li>
+              <%= link_to place_of_interests_path, class: "dropdown-item d-flex align-items-center" do %>
+                <i class="bi bi-geo mx-4"></i> POI Settings 
               <% end %>
             </li>
             <li><hr class="dropdown-divider"></li>
             <li>
               <%= link_to destroy_user_session_path, method: :delete, class: "dropdown-item d-flex align-items-center" do %>
-               <i class="bi bi-box-arrow-in-right mx-4"></i>Sign out
+               <i class="bi bi-box-arrow-in-right mx-4"></i>Sign Out
               <% end %>
             </li>
           </ul>
