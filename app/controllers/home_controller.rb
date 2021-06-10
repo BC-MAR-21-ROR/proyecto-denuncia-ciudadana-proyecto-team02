@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
   def index
-    @denounces = filtered_denounces.order(created_at: :desc)
+    @pagy, @denounces = pagy(filtered_denounces.order(created_at: :desc), items: 4)
   end
 
   private
