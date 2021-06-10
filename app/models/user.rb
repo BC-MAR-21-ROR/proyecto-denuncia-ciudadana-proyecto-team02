@@ -37,4 +37,13 @@ class User < ApplicationRecord
                        if: :password
   has_many :denounces
   has_many :place_of_interest
+  has_many :likes, dependent: :destroy
+
+  def like?(likeable)
+    likes.find_by(likeable_id: likeable.id, likeable_type: likeable.class.name)
+  end
+
+  def postal_codes_by_place_of_interest
+    place_of_interest.pluck(:postal_code)
+  end
 end
