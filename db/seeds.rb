@@ -17,10 +17,10 @@ user_test = FactoryBot.create(
   password_confirmation: 'test1234'
 )
 
-p "Generating randoms denounces for main user!"
+p "Generating random denounces for main user!"
 denounces = FactoryBot.create_list(:denounce, 10, user: user_test)
 
-p "Generating randoms places of interest for #{user_test.username}...!"
+p "Generating random places of interest for #{user_test.username}...!"
 denounces.each do |denounce|
   current_address = denounce.address
   FactoryBot.create(
@@ -31,18 +31,51 @@ denounces.each do |denounce|
   )
 end
 
-
 # GENERATE MORE TEST
 
-def create_seed(number)
-  denounces = FactoryBot.create_list(:denounce, number)
-  denounces.each { |denounce| FactoryBot.create_list(:like, rand(1..10), likeable: denounce) }
-  User.limit(10).each { |user| FactoryBot.create_list(:place_of_interest, rand(1..10), user: user) }
+def create_users(number)
+  FactoryBot.create_list(:user, number)
+end
+
+def create_denunce(users)
+  users.map do |user|
+    FactoryBot.create_list(:denounce, rand(1..5), user: user)
+  end.flatten
+end
+
+def create_places_of_interest(users)
+  Denounce.all.sample(10).each do |denounce|
+    current_address = denounce.address
+    FactoryBot.create(
+      :place_of_interest,
+      user: users.sample,
+      settlement: current_address.settlement,
+      postal_code: current_address.postal_code
+    )
+  end
+end
+
+def create_likes_random(users)
+  users.each do |user|
+    Denounce.all.sample(10).each do |denounce|
+      FactoryBot.create(:like, likeable: denounce, user: user)
+    end
+  end
+end
+
+def create_seeds(number)
+  print '.'
+  # n = number
+  u = create_users(number)
+  create_denunce(u)
+  create_places_of_interest(u)
+  create_likes_random(u)
+  print '.'
 end
 
 thr = []
-thr << Thread.new { create_seed(25) }
-thr << Thread.new { create_seed(25) }
-thr << Thread.new { create_seed(25) }
-thr << Thread.new { create_seed(25) }
+thr << Thread.new { create_seeds(10) }
+thr << Thread.new { create_seeds(10) }
+thr << Thread.new { create_seeds(10) }
+thr << Thread.new { create_seeds(10) }
 thr.each(&:join)
