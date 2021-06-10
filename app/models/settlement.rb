@@ -19,4 +19,6 @@
 #
 class Settlement < ApplicationRecordAws
   belongs_to :municipality
+
+  scope :for, ->(municipality) { joins(:municipality).where(municipality: { name: municipality }) }
 end

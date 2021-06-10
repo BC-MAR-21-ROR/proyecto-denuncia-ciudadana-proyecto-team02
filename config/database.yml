@@ -6,27 +6,13 @@ default: &default
   host: localhost
   port: 5432
 
-aws: &aws
-  url: <%= ENV.fetch("PROVINCES_DATABASE_URL", "") %>
-  migrations_paths: db/provinces_migrate
-
 development:
-  primary:
-    <<: *default
-    database: denuncia_ciudadana_dev
-  provinces:
-    <<: *aws
+  <<: *default
+  database: denuncia_ciudadana_dev
 
 test:
-  primary:
-    <<: *default
-    database: denuncia_ciudadana_test
-  provinces:
-    <<: *aws
-
+  <<: *default
+  database: denuncia_ciudadana_test
 
 production:
-  primary:
-    url: <%= ENV["DATABASE_URL"] %>
-  provinces:
-    <<: *aws
+  url: <%= ENV["DATABASE_URL"] %>

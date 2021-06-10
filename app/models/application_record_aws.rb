@@ -1,4 +1,4 @@
 class ApplicationRecordAws < ActiveRecord::Base
   self.abstract_class = true
-  connects_to database: { writing: :provinces, reading: :provinces }
+  establish_connection Rails.application.credentials.provinces_database_url
 end

@@ -1,14 +1,14 @@
 # Create settlements for a group of states
 def create_state_data(states, settlements)
   states.each do |state_name|
-    state = State.find_or_create_by(name: state_name)
+    state = State.find_or_create_by!(name: state_name)
     municipalities = settlements.sheet(state_name).parse(
       postal_code: 'd_codigo',
       municipality: 'D_mnpio',
       name: 'd_asenta'
     ).group_by { |settlement| settlement[:municipality] }
     municipalities.each do |municipality_name, settlements|
-      municipality = Municipality.find_or_create_by(
+      municipality = Municipality.find_or_create_by!(
         name: municipality_name,
         state: state
       )

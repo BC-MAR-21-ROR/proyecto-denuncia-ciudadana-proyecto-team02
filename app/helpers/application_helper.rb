@@ -4,7 +4,7 @@ module ApplicationHelper
   def flash_bootstrap(type)
     {
       'error' => :danger,
-      'notice' => :primary,
+      'notice' => :info,
       'alert' => :warning,
       'success' => :success
     }.fetch(type, 'notice')

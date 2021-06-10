@@ -19,4 +19,7 @@
 class Municipality < ApplicationRecordAws
   belongs_to :state
   has_many :settlements
+
+  scope :for, ->(state) { joins(:state).where(state: { name: state })}
+
 end
