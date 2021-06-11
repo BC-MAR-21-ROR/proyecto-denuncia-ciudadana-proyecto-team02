@@ -1,8 +1,8 @@
 // inside app/frontend/js/bootstrap_js_files.js
 import * as bootstrap from "bootstrap"
 import 'bootstrap/js/src/alert'
-// import 'bootstrap/js/src/button'
-// import 'bootstrap/js/src/carousel'
+import 'bootstrap/js/src/button'
+import 'bootstrap/js/src/carousel'
 // import 'bootstrap/js/src/collapse'
 // import 'bootstrap/js/src/dropdown'
 // import 'bootstrap/js/src/modal'
