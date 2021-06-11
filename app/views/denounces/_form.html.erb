@@ -43,8 +43,8 @@
         </div>
         <div class="col-lg-10">
           <div class="field">
-            <%= form.file_field :medias, { multiple: true, id: "myfiles" } %>
-            <% @denounce.medias.each do |media| %>
+            <%= form.file_field :medias, { multiple: true } %>
+             <% @denounce.medias.each do |media| %>
               <%= image_tag url_for(media), class: 'img-fluid img-thumbnail' %>
               <%= link_to 'x', evidence_url(media_id: media), method: :delete, data: { confirm: 'Are you sure' }, class: 'remove-media' %>
             <% end %>
