@@ -28,7 +28,7 @@
             <dt class="col-6"><strong>Anonymous:</strong></dt>
             <dd class="col-6"><%= @denounce.anonymouse %></dd>
 
-            <%= render partial: 'partials/evidence_carousel', locals: { images: @denounce.medias } if @denounce.medias.attached? %>
+            <%= render partial: 'partials/evidence_carousel', locals: { attachments: @denounce.medias } %>
 
             <% if @denounce.address %>
               <h4>Address</h4>

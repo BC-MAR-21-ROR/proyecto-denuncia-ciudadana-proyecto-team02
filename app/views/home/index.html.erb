@@ -7,11 +7,11 @@
   </div>
   <div class="card-body">
     <ul class="list-group list-group-horizontal-lg">
-      <li class="list-group-item col-lg-6">
+      <li class="list-group-item col-lg-5 mx-lg-5">
         <h6 class="card-subtitle mb-2 text-muted">Denouncement# <%= denounce.id%></h6>
       </li>
-      <li class="list-group-item col-lg-6">
-        <h6 class="card-subtitle mb-2 text-muted float-end-lg">Published: <%= denounce.created_at%></h6>
+      <li class="list-group-item col-lg-5 mx-lg-5">
+        <h6 class="card-subtitle mb-2 text-lg-end text-muted">Published: <%= denounce.created_at%></h6>
       </li>
     </ul>
     <ul class="list-group list-group-horizontal-lg d-flex justify-content-around">
@@ -29,14 +29,14 @@
         <h6>Street: <span class="text-muted mx-2"><%= denounce.address.street%></span></h6>
         <h6>Number: <span class="text-muted mx-2"><%= denounce.address.number%></span></h6>
         <h6>State: <span class="text-muted mx-2"><%= denounce.address.state%></span></h5>
-          <h6>Municipally: <span class="text-muted mx-2"><%= denounce.address.municipality%></span></h6>
-          <h6>Settlement: <span class="text-muted mx-2"><%= denounce.address.settlement%></span></h6>
-          <h6>Postal code: <span class="text-muted mx-2"><%= denounce.address.postal_code%></span></h6>
+        <h6>Municipally: <span class="text-muted mx-2"><%= denounce.address.municipality%></span></h6>
+        <h6>Settlement: <span class="text-muted mx-2"><%= denounce.address.settlement%></span></h6>
+        <h6>Postal code: <span class="text-muted mx-2"><%= denounce.address.postal_code%></span></h6>
       </li>
       <li class="list-group-item col-lg-3">
         <h5>Evidence</h5>
         <hr class="bg-primary">
-        <%= render partial: 'partials/evidence_carousel', locals: { images: denounce.medias } %>
+        <%= render partial: 'partials/evidence_carousel', locals: { attachments: denounce.medias } %>
       </li>
     </ul>
     <%= likeable?(denounce) ? like_link_for(denounce) : unlike_link_for(denounce) %>
