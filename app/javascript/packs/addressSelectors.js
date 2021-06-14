@@ -51,7 +51,7 @@ class SelectAddress {
     let currentIndexToInspect = this.currentSelectors.length - 1
     while (currentIndexToInspect >= 0) {
       if (selectedIndex === currentIndexToInspect || (currentIndexToInspect === selectedIndex + 1 && !isInitialSetup)) {
-        this.currentSelectors[currentIndexToInspect].disabled = false 
+        this.currentSelectors[currentIndexToInspecast].disabled = false 
         return
       }
       this.currentSelectors[currentIndexToInspect].value = "";
