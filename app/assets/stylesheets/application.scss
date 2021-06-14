@@ -44,4 +44,19 @@
     background-color: DodgerBlue !important;
     color: #ffffff;
   }
-  
+
+.img-size {
+    height: 50px;
+}
+
+#name-photo{
+    font-size: 0.9rem;
+    font-weight: 300;
+    line-height: 1;
+}
+
+@media (max-width: 600px) {
+    .img-size {
+        height: 180px;
+    }
+}

@@ -17,7 +17,7 @@ class Denounce < ApplicationRecord
   validates :area, :title, :description, presence: true
   validates :medias, content_type: %i[png jpg jpeg pdf]
   validates :medias, size: { less_than: 10.megabytes , message: 'is not given between size' }
-  validates :medias, limit: { min: 1, max: 3 }
+  validates :medias, limit: { min: 1, max: 5 }
   belongs_to :user
   has_one :address, dependent: :destroy
   has_many_attached :medias, dependent: :destroy
