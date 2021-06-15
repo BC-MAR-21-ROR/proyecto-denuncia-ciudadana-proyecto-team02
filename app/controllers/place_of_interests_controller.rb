@@ -5,7 +5,7 @@ class PlaceOfInterestsController < ApplicationController
   # GET /place_of_interests or /place_of_interests.json
   def index
     # @place_of_interests = PlaceOfInterest.all
-    @place_of_interests = current_user.place_of_interest.all
+    @pagy, @place_of_interests = pagy(current_user.place_of_interest.all, items: 12)
   end
 
   # GET /place_of_interests/1 or /place_of_interests/1.json

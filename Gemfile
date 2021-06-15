@@ -18,6 +18,8 @@ gem 'faker', '~> 2.17'
 gem 'jbuilder', '~> 2.7'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.3', '>= 6.1.3.1'
+# https://github.com/ddnexus/pagy
+gem 'pagy', '~> 3.5'
 # Use postgress as the database for Active Record
 gem 'pg'
 # Use Puma as the app server
