@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 module EvidenceHelper
 
   def render_evidences(attachments)
-    if attachments.count > 0
+    if attachments.count.positive?
       render_evidence_carousel_preview(attachments)
     else
       render_no_image
@@ -12,32 +14,24 @@ module EvidenceHelper
     attachments.each_with_index do |attachment, index|
       concat(
         content_tag(:div, class: "carousel-item #{'active' if index.zero?}") do
-          if attachment.image?
-            image_tag(url_for(attachment), class: 'img-fluid img-thumbnail')
-          else
-            link_to(url_for(attachment)) do
-              # byebug
-              image_tag('pdf.svg', class: 'img-fluid img-thumbnail p-5')
-            end
-          end
+          render_attachment(attachment, 'img-fluid img-thumbnail p-5')
         end
       )
     end
     return
   end
-  
+
   def render_no_image
     image_tag('no-image.svg', class: 'img-fluid img-thumbnail p-5')
   end
 
-  def render_evidences_edit(attachment)
+  def render_attachment(attachment, styles)
     if attachment.image?
-      image_tag(url_for(attachment), class: 'img-size')
+      image_tag(url_for(attachment), class: styles)
     else
       link_to(url_for(attachment)) do
-        image_tag('pdf.svg', class: 'img-size')
+        image_tag('pdf.svg', class: styles)
       end
     end
   end
-
 end
