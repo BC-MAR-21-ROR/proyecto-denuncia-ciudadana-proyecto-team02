@@ -6,7 +6,7 @@ class DenouncesController < ApplicationController
 
   # GET /denounces
   def index
-    @pagy, @denounces = pagy(current_user.denounces.order(created_at: :desc), items: 10)
+    @pagy, @denounces = pagy(current_user.denounces.includes(:address).order(created_at: :desc), items: 10)
   end
 
   # GET /denounces/1
@@ -56,7 +56,7 @@ class DenouncesController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_denounce
-    @denounce = current_user.denounces.find(params[:id])
+    @denounce = current_user.denounces.includes(medias_attachments: :blob).find(params[:id])
   end
 
   # Only allow a list of trusted parameters through.
