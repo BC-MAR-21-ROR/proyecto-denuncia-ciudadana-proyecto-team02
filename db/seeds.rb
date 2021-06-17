@@ -20,6 +20,14 @@ user_test = FactoryBot.create(
 p "Generating random denounces for main user!"
 denounces = FactoryBot.create_list(:denounce, 10, user: user_test)
 
+p "Generaring random attachment for main user!"
+denounces.each do |denounce|
+  files = ['unsplash.jpeg', 'file.pdf'].take(rand(1..2))
+  files.each do |file|
+    denounce.medias.attach(io: File.open("app/assets/attachments/#{file}"), filename: file)
+  end
+end
+
 p "Generating random places of interest for #{user_test.username}...!"
 denounces.each do |denounce|
   current_address = denounce.address
