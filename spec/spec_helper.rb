@@ -1,5 +1,6 @@
 require 'simplecov'
 require 'simplecov_small_badge'
+require 'active_storage_validations/matchers'
 
 # Wherever your SimpleCov.start block is (spec_helper.rb, test_helper.rb, or .simplecov)
 SimpleCov.start(:rails) do
@@ -43,6 +44,7 @@ end
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
+  config.include ActiveStorageValidations::Matchers
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
   # assertions if you prefer.
