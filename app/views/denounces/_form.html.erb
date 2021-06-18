@@ -56,7 +56,12 @@
                       <span id ="name-photo"> <%= media.filename %> </span>
                     </div>
                     <div class="col-md-2 d-flex justify-content-center my-sm-2">
+<<<<<<< HEAD
                       <%= link_to evidence_path(media_id: media), method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-link text-danger", title: "Delete", "data-bs-toggle"=> :tooltip  do %>
+=======
+                      <%= link_to evidence_url(media_id: media), method: :delete, data: { confirm: 'Are you sure?' },
+                       class:"btn btn-link text-danger", title: "Delete", "data-bs-toggle"=> :tooltip  do %>
+>>>>>>> Add system test for destroy evidence:
                       <i class="bi bi-trash"></i>
                       <% end %>
                     </div>
