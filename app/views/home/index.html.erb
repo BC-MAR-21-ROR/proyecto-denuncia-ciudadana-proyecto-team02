@@ -1,6 +1,7 @@
 <% @denounces.each do |denounce| %>
   <%= render partial: 'partials/denounce', locals: { denounce: denounce } %>
 <%end%>
+<%= render partial:'partials/empty' if @denounces.length <=0 %>
 <div class="d-flex justify-content-center">
-  <%== pagy_bootstrap_nav(@pagy) %>
+  <%== pagy_bootstrap_nav(@pagy) unless @denounces.length <= 0 %>
 </div>
