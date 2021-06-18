@@ -46,7 +46,12 @@
   }
 
 .img-size {
-    height: 50px;
+    height: 180px;
+}
+
+.img-carousel {
+    width: 200px;
+    height: auto;
 }
 
 #name-photo{
@@ -60,3 +65,5 @@
         height: 180px;
     }
 }
+
+$carousel-control-width: 5%;

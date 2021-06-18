@@ -13,7 +13,7 @@ module EvidenceHelper
   def render_evidence_carousel_preview(attachments)
     attachments.each_with_index do |attachment, index|
       concat(
-        content_tag(:div, class: "carousel-item #{'active' if index.zero?}") do
+        content_tag(:div, class: "carousel-item #{'active' if index.zero?} img-carousel") do
           render_attachment(attachment, 'img-fluid img-thumbnail p-5')
         end
       )
