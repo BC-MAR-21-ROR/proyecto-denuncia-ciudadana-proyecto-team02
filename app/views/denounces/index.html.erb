@@ -36,7 +36,7 @@
               <div class="accordion-header" id=<%= "denouncesHeading-#{denounce.id}"%>>
                 <div class="row px-md-4 justify-content-between align-items-lg-center">
                   <div class="col-xs-12 col-lg-3 d-flex justify-content-center">
-                    Date: <%= Time.at(denounce.created_at.to_i).to_formatted_s(:long_ordinal) %>
+                    Published: <%= Time.at(denounce.created_at.to_i).to_formatted_s(:short_readable) %>
                   </div>
                   <div class="col-xs-12 col-lg-3 d-flex justify-content-center justify-content-lg-start m-lg-0">
                     Title: <%= (denounce.title) ? denounce.title : "empty" %>
@@ -85,7 +85,7 @@
                           is anonymouse?: <%= (denounce.anonymouse) ? "yes" : "Not" %>
                         </div>
                         <div class="col-xs-12 my-1">
-                          Event date: <%= denounce.event_date %>
+                          Event date: <%= denounce.event_date.to_formatted_s(:readable_date) %>
                         </div>
                       </div>
                     </div>
