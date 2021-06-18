@@ -7,9 +7,9 @@ class HomeController < ApplicationController
 
   def filtered_denounces
     if current_user&.postal_codes_by_place_of_interest&.any?
-      Denounce.for_postal_code(current_user.postal_codes_by_place_of_interest)
+      Denounce.includes(:address, :user, medias_attachments: :blob).for_postal_code(current_user.postal_codes_by_place_of_interest)
     else
-      Denounce.all
+      Denounce.includes(:address, :user, medias_attachments: :blob).all
     end
   end
 end

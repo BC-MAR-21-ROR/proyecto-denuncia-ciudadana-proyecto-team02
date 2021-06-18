@@ -36,7 +36,7 @@
       <li class="list-group-item col-lg-3">
         <h5>Evidence</h5>
         <hr class="bg-primary">
-        <%= render partial: 'partials/evidence_carousel', locals: { attachments: denounce.medias } %>
+        <%= render partial: 'partials/evidence_carousel', locals: { attachments: denounce.medias} %>
       </li>
     </ul>
     <%= likeable?(denounce) ? like_link_for(denounce) : unlike_link_for(denounce) %>
