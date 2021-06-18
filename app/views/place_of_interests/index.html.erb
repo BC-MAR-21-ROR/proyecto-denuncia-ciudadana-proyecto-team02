@@ -1,10 +1,10 @@
 
 <div class="row justify-content-center">
-  <div class="col-xs-12 col-md-6 text-center my-4">
+  <div class="col-xs-12 text-center my-4">
     <h3>Place Of Interests</h3>
   </div>
 
-  <div class="col-xs-12 col-md-10">
+  <div class="col-xs-12 col-md-6">
     <div class="table-reponsive">
       <table class="table table-striped table-hover">
         <thead>
@@ -12,10 +12,14 @@
             <th scope="col">Postal code</th>
             <th scope="col">Settlement</th>
             <th colspan="2" scope="col"></th>
-            <th scope="col"> <%= link_to 'New POI', new_place_of_interest_path, class: "btn btn-primary" %> </th>
+            <th scope="col"> 
+              <%= link_to new_place_of_interest_path, class: "btn btn-outline-primary" do %>
+                <i class="bi bi-plus-circle">  Add new POI</i>
+              <% end %> 
+            </th>
           </tr>
         </thead>
-
+        <hr class="my-0">
         <tbody>
           <% @place_of_interests.each do |place_of_interest| %>
             <tr>
@@ -26,20 +30,25 @@
                 <%= link_to place_of_interest, class: "btn btn-link" , title: "Show" , "data-bs-toggle"=> :tooltip do   %>
                   <i class="bi bi-eye"></i>
                 <% end %>
-                <%= link_to place_of_interest_path(place_of_interest), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-link" , title: "Delete" , "data-bs-toggle"=> :tooltip do  %>
-                  <i class="bi bi-trash"></i>
-                <% end %>
-                <%= link_to edit_place_of_interest_path(place_of_interest), class: "btn btn-link", title: "Edit" , "data-bs-toggle"=> :tooltip do   %>
+                <%= link_to edit_place_of_interest_path(place_of_interest), class: "btn btn-link text-dark", title: "Edit" , "data-bs-toggle"=> :tooltip do   %>
                   <i class="bi bi-pencil"></i>
+                <% end %>
+                <%= link_to place_of_interest_path(place_of_interest), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-link text-danger" , title: "Delete" , "data-bs-toggle"=> :tooltip do  %>
+                  <i class="bi bi-trash"></i>
                 <% end %>
               </td>
             </tr>
           <% end %>
         </tbody>
       </table>
+      <div class="row justify-content-center">
+        <div class="col align-items-center my-5">
+          <%= render partial:'partials/empty' if @place_of_interests.length <=0 %>
+        </div>
+      </div>
     </div>
   </div>
 </div>
 <div class="d-flex justify-content-center">
-  <%== pagy_bootstrap_nav(@pagy) %>
+  <%== pagy_bootstrap_nav(@pagy) unless @place_of_interests.length <= 0 %>
 </div>
