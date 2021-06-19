@@ -16,7 +16,7 @@ RSpec.describe 'evidence', type: :system do
       it 'can destroy evidence' do
         denounce
         login(as: user)
-        visit("/denounces/#{denounce.id}/edit")
+        visit(edit_denounce_path(denounce))
         first('.btn-link .bi-trash').click
         accept_alert { 'Are you sure?' }
         expect(page).to have_content(/successfully deleted/)

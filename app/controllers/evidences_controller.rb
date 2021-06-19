@@ -4,7 +4,7 @@ class EvidencesController < ApplicationController
   before_action :set_media
 
   def destroy
-    if @media.record.errors.empty?
+    if @media.record.valid?
       @media.purge
       flash[:success] = 'Evidence has been successfully deleted'
     end
