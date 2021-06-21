@@ -2,11 +2,16 @@
 
 class DenouncesController < ApplicationController
   before_action :set_denounce, only: %i[show edit update destroy]
+  before_action :load_denounces, only: %i[index]
   before_action :authenticate_user!
 
   # GET /denounces
   def index
-    @pagy, @denounces = pagy(current_user.denounces.includes(:address).order(created_at: :desc), items: 10)
+    if params[:query].present?
+      @pagy, @denounces = pagy(@recorded_denounces.search(params[:query].downcase), items: 10)
+    else
+      @pagy, @denounces = pagy(@recorded_denounces, items: 10)
+    end
   end
 
   # GET /denounces/1
@@ -57,6 +62,10 @@ class DenouncesController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_denounce
     @denounce = current_user.denounces.includes(medias_attachments: :blob).find(params[:id])
+  end
+
+  def load_denounces
+    @recorded_denounces = current_user.denounces.order(created_at: :desc)
   end
 
   # Only allow a list of trusted parameters through.

@@ -25,4 +25,8 @@ class Denounce < ApplicationRecord
   has_many :likes, as: :likeable, dependent: :destroy
 
   scope :for_postal_code, ->(postal_codes) { joins(:address).where(address: { postal_code: postal_codes }) }
+
+  def self.search(params)
+    where('LOWER(title) LIKE ?', "%#{params}%")
+  end
 end

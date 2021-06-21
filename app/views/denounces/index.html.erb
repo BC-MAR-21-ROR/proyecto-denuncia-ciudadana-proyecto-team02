@@ -3,19 +3,12 @@
     <div class="card border-primary">
       <div class="card-body">
         <div class="row d-flex align-items-center">
-          <div class="col-xs-10 col-lg-6">
-            <form class="row d-flex justify-content-xs-center">
-              <div class="col-xs-3 col-sm-6">
-                <input class="form-control" type="search" placeholder="Search" aria-label="Search">
-              </div>
-              <div class="col-xs-6 col-sm-5">
-                <button class="btn btn-secondary my-xs-2" type="submit"><i class="bi bi-search mt-xs-2">  Search</i></button>
-              </div>
-            </form>
+          <div class="col-6">
+            <%= render partial: 'partials/search_form_bar', locals: {placeholder_text: "Denounce title...", endpoint_url: denounces_path } %>
           </div>
           <div class="col-xs-12 col-lg-6 d-flex justify-content-xs-center justify-content-lg-end">
             <%= link_to new_denounce_path, class: "btn btn-outline-primary my-2" do %>
-              <i class="bi bi-plus-circle">  Add new Denounce</i>
+              <i class="bi bi-plus-circle"> Add new Denounce</i>
             <% end %>
           </div>
         </div>
