@@ -44,6 +44,7 @@
         <div class="col-lg-10 overflow-scroll" style="height: 260px">
           <div class="field">
             <%= form.file_field :medias, { multiple: true } %>
+            <p class="upload-tag">Only files .pdf .jpg .jpeg .png and 10 Mb limit</p>
              <% @denounce.medias.each do |media| %>
               <div class="card">
                 <div class="card-body">
@@ -55,7 +56,7 @@
                       <span id ="name-photo"> <%= media.filename %> </span>
                     </div>
                     <div class="col-md-2 d-flex justify-content-center my-sm-2">
-                      <%= link_to evidence_url(media_id: media), method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-link text-danger", title: "Delete", "data-bs-toggle"=> :tooltip  do %>
+                      <%= link_to evidence_path(media_id: media), method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-link text-danger", title: "Delete", "data-bs-toggle"=> :tooltip  do %>
                       <i class="bi bi-trash"></i>
                       <% end %>
                     </div>
