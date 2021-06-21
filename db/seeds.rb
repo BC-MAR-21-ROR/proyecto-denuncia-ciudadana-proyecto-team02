@@ -17,13 +17,13 @@ user_test = FactoryBot.create(
   password_confirmation: 'test1234'
 )
 
-p "Generating random denounces for main user!"
+p 'Generating random denounces for main user!'
 denounces = FactoryBot.create_list(:denounce, 10, user: user_test)
 
-p "Generaring random attachment for main user!"
+p 'Generaring random attachment for main user!'
 denounces.each do |denounce|
-  files = ['unsplash.jpeg', 'file.pdf'].take(rand(1..2))
-  files.each do |file|
+  files = ['unsplash.jpeg', 'unsplash_1.jpeg', 'unsplash_2.jpeg', 'file.pdf', 'file_1.pdf']
+  files.sample(rand(0..5)).each do |file|
     denounce.medias.attach(io: File.open("app/assets/attachments/#{file}"), filename: file)
   end
 end
@@ -73,7 +73,6 @@ end
 
 def create_seeds(number)
   print '.'
-  # n = number
   u = create_users(number)
   create_denunce(u)
   create_places_of_interest(u)
