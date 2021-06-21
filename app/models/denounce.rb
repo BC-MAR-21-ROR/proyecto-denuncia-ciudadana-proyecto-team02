@@ -25,4 +25,17 @@ class Denounce < ApplicationRecord
   has_many :likes, as: :likeable, dependent: :destroy
 
   scope :for_postal_code, ->(postal_codes) { joins(:address).where(address: { postal_code: postal_codes }) }
+
+  after_create :send_notifications
+
+  def send_notifications
+    @users = PlaceOfInterest.where(postal_code: address.postal_code).pluck(:user_id)
+    User.find(@users).each do |user|
+      ApplicationMailer.with(
+        user: user,
+        denounce: self
+      ).denounce_created.deliver
+    end
+  end
+
 end
