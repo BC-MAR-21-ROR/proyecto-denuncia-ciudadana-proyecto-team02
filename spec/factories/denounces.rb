@@ -21,5 +21,12 @@ FactoryBot.define do
     anonymouse { [true, false].sample }
     user
     address { association :address, denounce: instance }
+
+    trait :with_medias do
+      after(:create) do |denounce|
+        file_path = Rails.root.join('app', 'assets', 'attachments', 'unsplash.jpeg')
+        denounce.medias.attach(io: File.open(file_path), filename: 'unsplash.jpeg', content_type: 'image/jpeg')
+      end
+    end
   end
 end

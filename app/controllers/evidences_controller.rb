@@ -1,14 +1,23 @@
 # frozen_string_literal: true
 
 class EvidencesController < ApplicationController
+  before_action :set_media
+
   def destroy
-    media = ActiveStorage::Attachment.find(params[:media_id])
-    media.purge if media.record.errors.empty?
+    if @media.record.valid?
+      @media.purge
+      flash[:success] = 'Evidence has been successfully deleted'
+    end
   rescue StandardError => e
-    flash[:error] = "Sorry, image couldn't be upload"
-    logger.error "LOG DE ERROR rescue #{media.inspect}"
-    logger.error "Mensaje de exception #{e}"
+    flash[:error] = "Sorry evidence can't be deleted, please try again!"
+    logger.error "LOG ERROR rescue #{@media.inspect}\nException message #{e} "
   ensure
     redirect_back(fallback_location: request.referer)
+  end
+
+  private
+
+  def set_media
+    @media = ActiveStorage::Attachment.find(params[:media_id])
   end
 end
