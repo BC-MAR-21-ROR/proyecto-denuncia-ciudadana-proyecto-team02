@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class DenouncesController < ApplicationController
-  before_action :set_denounce, only: %i[show edit update destroy]
+  before_action :set_denounce, only: %i[edit update destroy]
   before_action :authenticate_user!
 
   # GET /denounces
@@ -10,7 +10,9 @@ class DenouncesController < ApplicationController
   end
 
   # GET /denounces/1
-  def show; end
+  def show
+    @denounce = Denounce.find(params[:id])
+  end
 
   # GET /denounces/new
   def new
