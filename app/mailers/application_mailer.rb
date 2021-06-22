@@ -8,7 +8,7 @@ class ApplicationMailer < ActionMailer::Base
     @user     = params[:user]
     mail(
       to: @user.email,
-      subject: "A new denounce has been created in one of your places of interest",
+      subject: 'A new denounce has been created in one of your places of interest',
       template_path: 'notifications'
     )
   end
