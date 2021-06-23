@@ -7,7 +7,7 @@
   <div class="card-body">
     <ul class="list-group list-group-horizontal-lg d-flex justify-content-around">
       <li class="list-group-item col-lg-3">
-        <h6 class="card-subtitle text-muted pb-5">Title: <%= link_to denounce.title, denounce_path(denounce) %></h6>
+        <h6 class="card-subtitle text-muted pb-5">Title: <%= action_name == 'index' ? link_to(denounce.title, denounce_path(denounce)) : denounce.title %></h6>
         <h5>Details</h5>
         <hr class="bg-primary">
         <h6>Date & time of succession:<span class="text-muted mx-2"><%= denounce.event_date.to_formatted_s(:readable_date) %></span></h5>
