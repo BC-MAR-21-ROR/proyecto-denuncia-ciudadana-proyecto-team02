@@ -21,9 +21,7 @@ module CapybaraAuthenticationHelper
   end
 
   def logout
-    # close alert if found
-    find('[data-bs-dismiss="alert"]').click if have_selector?('[data-bs-dismiss="alert"]')
-    find('.dropstart').click
-    click_on 'Sign out'
+    find('#navbarDropdownMenuLink').click
+    click_on 'Sign Out'
   end
 end

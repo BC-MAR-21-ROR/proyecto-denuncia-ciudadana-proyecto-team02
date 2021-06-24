@@ -13,8 +13,8 @@ module EvidenceHelper
   def render_evidence_carousel_preview(attachments)
     attachments.each_with_index do |attachment, index|
       concat(
-        content_tag(:div, class: "carousel-item #{'active' if index.zero?}") do
-          render_attachment(attachment, 'img-fluid img-thumbnail p-5')
+        content_tag(:div, class: "carousel-item #{'active' if index.zero?} ") do
+          render_attachment(attachment, 'd-block w-100 p-4 img-carousel')
         end
       )
     end
@@ -22,12 +22,12 @@ module EvidenceHelper
   end
 
   def render_no_image
-    image_tag('no-image.svg', class: 'img-fluid img-thumbnail p-5')
+    image_tag('no-image.svg', class: 'd-block w-100 p-4 img-carousel')
   end
 
   def render_attachment(attachment, styles)
     if attachment.image?
-      image_tag(url_for(attachment), class: styles)
+      image_tag(attachment, class: styles)
     else
       link_to(url_for(attachment)) do
         image_tag('pdf.svg', class: styles)

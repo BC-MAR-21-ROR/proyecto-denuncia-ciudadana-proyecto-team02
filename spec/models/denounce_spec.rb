@@ -6,7 +6,7 @@
 #  anonymouse  :boolean          default(FALSE)
 #  area        :integer
 #  description :string
-#  event_date  :date
+#  event_date  :datetime
 #  title       :string
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null

@@ -4,7 +4,7 @@
       <div class="card-body">
         <div class="row d-flex align-items-center">
           <div class="col-xs-10 col-lg-6">
-            <form class="row d-flex justify-content-xs-center">
+            <form class="row d-flex justify-content-center">
               <div class="col-xs-3 col-sm-6">
                 <input class="form-control" type="search" placeholder="Search" aria-label="Search">
               </div>
@@ -31,9 +31,9 @@
           <div class="col-xs-12">
             <div class="accordion-item" >
               <div class="accordion-header" id=<%= "denouncesHeading-#{denounce.id}"%>>
-                <div class="row my-1 justify-content-between align-items-lg-center">
+                <div class="row px-md-4 justify-content-between align-items-lg-center">
                   <div class="col-xs-12 col-lg-3 d-flex justify-content-center">
-                    Date: <%= Time.at(denounce.created_at.to_i).to_formatted_s(:long_ordinal) %>
+                    Published: <%= Time.at(denounce.created_at.to_i).to_formatted_s(:short_readable) %>
                   </div>
                   <div class="col-xs-12 col-lg-3 d-flex justify-content-center justify-content-lg-start m-lg-0">
                     Title: <%= (denounce.title) ? denounce.title : "empty" %>
@@ -67,7 +67,7 @@
               <div id=<%= "collapse-#{denounce.id}" %> class="accordion-collapse collapse" aria-labelledby=<%= "denouncesHeading-#{denounce.id}" %> data-parent="#accordionDenounces">
                 <hr class="my-2">
                 <div class="accordion-body">
-                  <div class="row align-items-xs-start">
+                  <div class="row align-items-xs-start px-lg-1 px-xl-5">
                     <div class="col-xs-12 col-md-6">
                       <div class="row">
                         <div class="col-xs-12 my-1">
@@ -82,14 +82,14 @@
                           is anonymouse?: <%= (denounce.anonymouse) ? "yes" : "Not" %>
                         </div>
                         <div class="col-xs-12 my-1">
-                          Event date: <%= denounce.event_date %>
+                          Event date: <%= denounce.event_date.to_formatted_s(:readable_date) %>
                         </div>
                       </div>
                     </div>
                     <% if denounce.address %>
                       <div class="col-xs-12 col-md-6">
                         <div class="col-xs-12 my-1">
-                          <h4>Address:</h4>
+                          <h6>Address:</h6>
                           State: <%= denounce.address.state  %>
                         </div>
                         <div class="col-xs-12 my-1">
@@ -117,5 +117,8 @@
   </div>
 </div>
 <div class="d-flex justify-content-center">
-  <%== pagy_bootstrap_nav(@pagy) %>
+  <%== pagy_bootstrap_nav(@pagy) unless @denounces.length <= 0%>
+</div>
+<div class="col align-items-center my-5">
+  <%=  render partial:'partials/empty' if @denounces.length <= 0 %>
 </div>
